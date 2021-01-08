@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {ImLocation} from "react-icons/im";
 import {AiFillPhone} from "react-icons/ai";
 
 
