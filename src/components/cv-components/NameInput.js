@@ -24,9 +24,8 @@ export class NameInput extends Component {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-				{/* <div className="h-10 max-h-1" contentEditable="true">Content Editable</div> */}
-				<div className="m-3">
+			<div className="m-3">
+				<form id="cvform">
 					<input
 						className="w-1/2  inline-block text-2xl p-2 rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
 						type="text"
@@ -34,8 +33,8 @@ export class NameInput extends Component {
 						value={this.state.task}
 						onChange={this.handleChange}
 					></input>
-				</div>
-			</form>
+				</form>
+			</div>
 		);
 	}
 }

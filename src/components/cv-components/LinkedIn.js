@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import {AiFillLinkedin} from "react-icons/ai";
-
-
+import { AiFillLinkedin } from 'react-icons/ai';
 
 export class LinkedIn extends Component {
-    constructor(props) {
+	constructor(props) {
 		super(props);
 		this.state = {
 			name: '',
@@ -23,19 +21,21 @@ export class LinkedIn extends Component {
 		this.setState({
 			task: event.target.value,
 		});
-    };
-    
+	};
+
 	render() {
 		return (
 			<div className="flex flex-column items-right m-1">
 				<AiFillLinkedin className="text-xl m-2" />
-				<input
-					className="pl-2 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
-					type="text"
-					placeholder="Your LinkedIn here"
-					value={this.state.task}
-					onChange={this.handleChange}
-				></input>
+				<form id="cvform">
+					<input
+						className="pl-2 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
+						type="text"
+						placeholder="Your LinkedIn here"
+						value={this.state.task}
+						onChange={this.handleChange}
+					></input>
+				</form>
 			</div>
 		);
 	}
