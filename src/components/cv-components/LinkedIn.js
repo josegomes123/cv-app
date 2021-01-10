@@ -5,37 +5,39 @@ export class LinkedIn extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: '',
+			linkedin: '',
 		};
 	}
 
-	// handleSubmit = (event) => {
-	// 	event.preventDefault();
-	// 	if (this.state.task !== '') {
-	// 		this.props.handleData(this.state.task, this.state.id);
-	// 		this.setState({ task: '', id: this.state.id + 1 });
-	// 	}
-	// };
+	handleSubmit = (event) => {
+		event.preventDefault();
+		if (this.state.linkedin !== '') {
+			// this.props.linkedinHandler(this.state.linkedin);
+			this.props.onSubmit(event, this.state.linkedin);
+		}
+	};
 
 	handleChange = (event) => {
 		this.setState({
-			task: event.target.value,
+			linkedin: event.target.value,
 		});
-	};
+		this.props.handleInput(Object.keys(this.state)[0], this.state.linkedin);
+	}
+
+
 
 	render() {
 		return (
 			<div className="flex flex-column items-right m-1">
 				<AiFillLinkedin className="text-xl m-2" />
-				<form id="cvform">
 					<input
 						className="pl-2 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
 						type="text"
+						name="linkedin"
 						placeholder="Your LinkedIn here"
-						value={this.state.task}
+						value={this.state.linkedin}
 						onChange={this.handleChange}
 					></input>
-				</form>
 			</div>
 		);
 	}

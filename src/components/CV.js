@@ -8,7 +8,6 @@ import LinkedIn from './cv-components/LinkedIn';
 import Location from './cv-components/Location';
 import Phone from './cv-components/Phone';
 
-
 class CV extends Component {
 	constructor(props) {
 		super(props);
@@ -23,12 +22,24 @@ class CV extends Component {
 			experience: [],
 			academic: [],
 		};
+
+		this.handleInputChange = this.handleInputChange.bind(this);
+	}
+
+	handleInputChange(key, value) {
+		this.setState({
+			[key]: value,
+		});
+		console.log(this.state);
 	}
 
 	emailHandler = (email) => {
-		this.setState({ email: email});
+		this.setState({ email: email });
 	};
 
+	linkedinHandler = (linkedin) => {
+		this.setState({ linkedin: linkedin });
+	};
 
 	handleSubmit = (event) => {
 		event.preventDefault();
@@ -38,14 +49,21 @@ class CV extends Component {
 	render() {
 		return (
 			<div>
-				<NameInput nameHandler="" onClick={console.log(this.state)}></NameInput>
-				<SmallBio></SmallBio>
-				<Location></Location>
-				<Phone></Phone>
-				<Email emailHandler={this.emailHandler}></Email>
-				<LinkedIn></LinkedIn>
-				<Github></Github>
-				<button type="submit" form="cvForm"></button>
+				<form>
+				<NameInput handleInput={this.handleInputChange}></NameInput>
+				<SmallBio handleInput={this.handleInputChange}></SmallBio>
+				<Location handleInput={this.handleInputChange}></Location>
+				<Phone handleInput={this.handleInputChange}></Phone> 
+				<Email
+					handleInput={this.handleInputChange}
+				></Email>
+				<LinkedIn
+					handleInput={this.handleInputChange}
+				></LinkedIn>
+				<Github handleInput={this.handleInputChange}></Github>
+				<input type="submit" value="submit" >
+				</input>
+				</form>
 			</div>
 		);
 	}

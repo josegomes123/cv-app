@@ -27,7 +27,7 @@ export class SmallBio extends Component {
 				<div className="m-3">
 					<form id="cvform">
 						<textarea
-							className="w-1/2  inline-block text-xs p-2 rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
+							className="w-1/2  bg-gray-100 inline-block text-xs p-2 rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
 							type="text"
 							placeholder="Small bio about yourself here"
 							value={this.state.task}
