@@ -15,6 +15,7 @@ class CV extends Component {
 			name: '',
 			bio: '',
 			location: '',
+			email: '',
 			phone: '',
 			linkedin: '',
 			github: '',
@@ -25,20 +26,14 @@ class CV extends Component {
 		this.handleInputChange = this.handleInputChange.bind(this);
 	}
 
-	handleInputChange(key, value) {
+	handleInputChange(event) {
+		let value = event.target.value;
+		let key = event.target.name;
 		this.setState({
 			[key]: value,
 		});
 		console.log(this.state);
 	}
-
-	emailHandler = (email) => {
-		this.setState({ email: email });
-	};
-
-	linkedinHandler = (linkedin) => {
-		this.setState({ linkedin: linkedin });
-	};
 
 	handleSubmit = (event) => {
 		event.preventDefault();
@@ -49,15 +44,36 @@ class CV extends Component {
 		return (
 			<div>
 				<form className="grid grid-cols-2 m-6">
-					<NameInput handleInput={this.handleInputChange}></NameInput>
+					<NameInput
+						value={this.state.name}
+						handleInput={this.handleInputChange}
+					></NameInput>
 					<div className="justify-self-end">
-						<Location handleInput={this.handleInputChange}></Location>
-						<Phone handleInput={this.handleInputChange}></Phone>
-						<Email handleInput={this.handleInputChange}></Email>
-						<LinkedIn handleInput={this.handleInputChange}></LinkedIn>
-						<Github handleInput={this.handleInputChange}></Github>
+						<Location
+							value={this.state.location}
+							handleInput={this.handleInputChange}
+						></Location>
+						<Phone
+							value={this.state.phone}
+							handleInput={this.handleInputChange}
+						></Phone>
+						<Email
+							value={this.state.email}
+							handleInput={this.handleInputChange}
+						></Email>
+						<LinkedIn
+							value={this.state.linkedin}
+							handleInput={this.handleInputChange}
+						></LinkedIn>
+						<Github
+							value={this.state.github}
+							handleInput={this.handleInputChange}
+						></Github>
 					</div>
-					<SmallBio handleInput={this.handleInputChange}></SmallBio>
+					<SmallBio
+						value={this.state.bio}
+						handleInput={this.handleInputChange}
+					></SmallBio>
 
 					<input type="submit" value="submit"></input>
 				</form>
