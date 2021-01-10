@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import NameInput from './cv-components/NameInput';
 import SmallBio from './cv-components/SmallBio';
-import PersonalInfo from './cv-components/PersonalInfo';
 import Email from './cv-components/Email';
 import Github from './cv-components/Github';
 import LinkedIn from './cv-components/LinkedIn';
@@ -49,20 +48,18 @@ class CV extends Component {
 	render() {
 		return (
 			<div>
-				<form>
-				<NameInput handleInput={this.handleInputChange}></NameInput>
-				<SmallBio handleInput={this.handleInputChange}></SmallBio>
-				<Location handleInput={this.handleInputChange}></Location>
-				<Phone handleInput={this.handleInputChange}></Phone> 
-				<Email
-					handleInput={this.handleInputChange}
-				></Email>
-				<LinkedIn
-					handleInput={this.handleInputChange}
-				></LinkedIn>
-				<Github handleInput={this.handleInputChange}></Github>
-				<input type="submit" value="submit" >
-				</input>
+				<form className="grid grid-cols-2 m-6">
+					<NameInput handleInput={this.handleInputChange}></NameInput>
+					<div className="justify-self-end">
+						<Location handleInput={this.handleInputChange}></Location>
+						<Phone handleInput={this.handleInputChange}></Phone>
+						<Email handleInput={this.handleInputChange}></Email>
+						<LinkedIn handleInput={this.handleInputChange}></LinkedIn>
+						<Github handleInput={this.handleInputChange}></Github>
+					</div>
+					<SmallBio handleInput={this.handleInputChange}></SmallBio>
+
+					<input type="submit" value="submit"></input>
 				</form>
 			</div>
 		);
