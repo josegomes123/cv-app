@@ -41,7 +41,7 @@ function Photo() {
 		photo = <img className="w-40 h-40 object-contain" src={imgData} />;
 	}
 
-	return <div>{photo}</div>;
+	return <div className="place-self-center col-start-1 row-start-1 col-span-2 row-span-2">{photo}</div>;
 }
 
 export default Photo;

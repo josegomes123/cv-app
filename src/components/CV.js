@@ -7,6 +7,7 @@ import LinkedIn from './cv-components/LinkedIn';
 import Location from './cv-components/Location';
 import Phone from './cv-components/Phone';
 import Photo from './cv-components/Photo';
+import Education from './cv-components/Education';
 
 class CV extends Component {
 	constructor(props) {
@@ -44,13 +45,13 @@ class CV extends Component {
 	render() {
 		return (
 			<div>
-				<form className="grid grid-cols-2 m-6">
+				<div className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-auto m-6">
 					<Photo></Photo>
 					<NameInput
 						value={this.state.name}
 						handleInput={this.handleInputChange}
 					></NameInput>
-					<div className="justify-self-end">
+					<div className="col-start-9 col-end-11 row-start-1 row-end-3">
 						<Location
 							value={this.state.location}
 							handleInput={this.handleInputChange}
@@ -76,9 +77,10 @@ class CV extends Component {
 						value={this.state.bio}
 						handleInput={this.handleInputChange}
 					></SmallBio>
+					<Education></Education>
 
-					<input type="submit" value="submit"></input>
-				</form>
+					<input className="col-start-1 row-start-6" type="submit" value="submit"></input>
+				</div>
 			</div>
 		);
 	}
