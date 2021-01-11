@@ -6,6 +6,7 @@ import Github from './cv-components/Github';
 import LinkedIn from './cv-components/LinkedIn';
 import Location from './cv-components/Location';
 import Phone from './cv-components/Phone';
+import Photo from './cv-components/Photo';
 
 class CV extends Component {
 	constructor(props) {
@@ -44,6 +45,7 @@ class CV extends Component {
 		return (
 			<div>
 				<form className="grid grid-cols-2 m-6">
+					<Photo></Photo>
 					<NameInput
 						value={this.state.name}
 						handleInput={this.handleInputChange}
