@@ -22,7 +22,7 @@ class CV extends Component {
 			linkedin: '',
 			github: '',
 			experience: [],
-			academic: [],
+			education: [],
 		};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -77,9 +77,16 @@ class CV extends Component {
 						value={this.state.bio}
 						handleInput={this.handleInputChange}
 					></SmallBio>
-					<Education></Education>
+					<Education
+						value={this.state.education}
+						handleInput={this.handleInputChange}
+					></Education>
 
-					<input className="col-start-1 row-start-6" type="submit" value="submit"></input>
+					<input
+						className="col-start-1 row-start-6"
+						type="submit"
+						value="submit"
+					></input>
 				</div>
 			</div>
 		);
