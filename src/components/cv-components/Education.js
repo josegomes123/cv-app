@@ -8,25 +8,27 @@ class Education extends Component {
 		super(props);
 
 		this.state = {
-			educationList: [],
+			edList: [],
 		};
 	}
 
-	addEducation = () => {};
+	addEducation = () => {
+	};
 
-	handleInputChange(event) {
-		let value = event.target.value;
-		let key = event.target.name;
-		this.setState({
-			[key]: value,
-		});
-		console.log(this.state);
-	}
 
 	render() {
+		const { edList } = this.state;
+		const educationList = edList.map((edBlock) => (
+			<EducationBlock
+				// key={task.id}
+				// id={task.id}
+				// task={task.taskName}
+				// handleDelete={this.handleTaskDelete}
+			></EducationBlock>
+		));
 		return (
 			<div className="row-start-3 row-end-auto row-auto col-start-1 col-end-11">
-				<div className="flex flex-col items-center">
+				<div className="">
 					<div>
 						<MdSchool className="inline w-12 h-12 m-2"></MdSchool>
 						<h1 className="inline align-middle text-3xl font-bold">
@@ -34,7 +36,7 @@ class Education extends Component {
 						</h1>
 					</div>
 
-					<hr class="border-0 bg-gray-500 text-gray-500 h-4 m-3"></hr>
+					<hr class="border-0 bg-gray-500 text-gray-500 h-px m-1"></hr>
 					<EducationBlock handleInput="{handleInputChange}"></EducationBlock>
 					<button
 						onClick={this.addEducation}
