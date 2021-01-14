@@ -21,8 +21,26 @@ class CV extends Component {
 			phone: '',
 			linkedin: '',
 			github: '',
-			experience: [],
-			education: [],
+			// needs default blank object for initial render
+			experience: [
+				{
+					id: 0,
+					company: '',
+					position: '',
+					startdate: '',
+					enddate: '',
+				},
+			],
+			// needs default blank object for initial render
+			education: [
+				{
+					id: 0,
+					school: '',
+					degree: '',
+					startdate: '',
+					enddate: '',
+				},
+			],
 		};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -41,6 +59,8 @@ class CV extends Component {
 		event.preventDefault();
 		console.log(this.state);
 	};
+
+	handleEducation = () => {};
 
 	render() {
 		return (
@@ -77,9 +97,7 @@ class CV extends Component {
 						value={this.state.bio}
 						handleInput={this.handleInputChange}
 					></SmallBio>
-					<Education
-						handleInput={this.handleInputChange}
-					></Education>
+					<Education handleInput={this.handleInputChange}></Education>
 
 					<input
 						className="col-start-1 col-end-11 row-start-6 transform border border-gray-200 bg-gray-200 text-gray-700 shadow rounded-md px-3 py-2 m-2 transition duration-150 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline active:scale-95"
