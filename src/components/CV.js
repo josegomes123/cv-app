@@ -41,6 +41,8 @@ class CV extends Component {
 					endDate: '',
 				},
 			],
+			edCount: 0,
+			expCount: 0,
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleEducationChange = this.handleEducationChange.bind(this);
@@ -70,17 +72,27 @@ class CV extends Component {
 		console.log(this.state);
 	}
 
-	addEducation() {
+	handleEducationAdd = () => {
 		this.setState({
 			education: this.state.education.concat({
-				id: 0,
+				id: this.state.edCount + 1,
 				school: '',
 				degree: '',
 				startDate: '',
 				endDate: '',
 			}),
 		});
-	}
+		this.setState({
+			edCount: this.state.edCount + 1,
+		})
+	};
+
+	handleEducationDelete = (id) => {
+		console.log(`deleting education block with ID ${id}`);
+		this.setState((prevState) => ({
+			education: prevState.education.filter((edBlock) => edBlock.id !== id),
+		}));
+	};
 
 	render() {
 		return (
@@ -118,9 +130,10 @@ class CV extends Component {
 						handleInput={this.handleInputChange}
 					></SmallBio>
 					<Education
-						edList={this.state.education}
+						educationList={this.state.education}
 						handleInput={this.handleEducationChange}
-						add={this.addEducation}
+						add={this.handleEducationAdd}
+						del={this.handleEducationDelete}
 					></Education>
 
 					<input

@@ -6,9 +6,9 @@ class EducationBlock extends Component {
 		super(props);
 		this.deleteBlock = this.deleteBlock.bind(this);
 		this.state = {
-			id: 0,
-			school: "",
-			degree: "",
+			id: this.props.value.id,
+			school: this.props.value.school,
+			degree: this.props.value.degree,
 			startdate: this.formatDate(new Date()),
 			enddate: this.formatDate(new Date()),
 		};
@@ -22,7 +22,6 @@ class EducationBlock extends Component {
 		this.setState({
 			[event.target.name]: event.target.value,
 		});
-		console.log('EDBlock state ' + JSON.stringify(this.state));
 		this.props.handleInput(this.state);
 	};
 
