@@ -6,11 +6,11 @@ class EducationBlock extends Component {
 		super(props);
 		this.deleteBlock = this.deleteBlock.bind(this);
 		this.state = {
-			id: this.props.value.id,
-			school: this.props.value.school,
-			degree: this.props.value.degree,
-			startdate: this.props.value.startDate,
-			enddate: this.props.value.endDate,
+			id: 0,
+			school: "",
+			degree: "",
+			startdate: this.formatDate(new Date()),
+			enddate: this.formatDate(new Date()),
 		};
 	}
 
@@ -19,7 +19,6 @@ class EducationBlock extends Component {
 	}
 
 	handleInput = (event) => {
-		console.log(event.target);
 		this.setState({
 			[event.target.name]: event.target.value,
 		});
@@ -40,7 +39,6 @@ class EducationBlock extends Component {
 	}
 
 	render() {
-		console.log(JSON.stringify(this.state));
 		const { id, school, degree, startDate, endDate } = this.state;
 		return (
 			<div className="m-2 grid grid-cols-3 grid-rows-3">

@@ -12,16 +12,15 @@ class Education extends Component {
 		};
 	}
 
-	addEducation = () => {
-	};
-
 
 	render() {
-		const { value, handleInput } = this.props;
-		const educationList = value.map((edBlock) => (
+		const { edList, handleInput, add } = this.props;
+		const educationList = edList.map((edBlock) => (
 			<EducationBlock
-				// key={task.id}
-				// id={task.id}
+				key={edBlock.id}
+				handleInput={handleInput}
+				value={edBlock}
+				// id={edBlock.id}
 				// task={task.taskName}
 				// handleDelete={this.handleTaskDelete}
 			></EducationBlock>
@@ -37,9 +36,9 @@ class Education extends Component {
 					</div>
 
 					<hr className="border-0 bg-gray-500 text-gray-500 h-px m-1"></hr>
-					<EducationBlock handleInput={handleInput} value={value}></EducationBlock>
+					{educationList}
 					<button
-						onClick={this.addEducation}
+						onClick={add}
 						className="transform border border-gray-200 bg-gray-200 text-gray-700 shadow rounded-md px-3 py-2 m-2 transition duration-150 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline active:scale-95"
 					>
 						<IoMdAddCircle className="text-2xl inline align-middle" /> Add More

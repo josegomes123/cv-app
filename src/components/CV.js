@@ -70,6 +70,18 @@ class CV extends Component {
 		console.log(this.state);
 	}
 
+	addEducation() {
+		this.setState({
+			education: this.state.education.concat({
+				id: 0,
+				school: '',
+				degree: '',
+				startDate: '',
+				endDate: '',
+			}),
+		});
+	}
+
 	render() {
 		return (
 			<div>
@@ -106,8 +118,9 @@ class CV extends Component {
 						handleInput={this.handleInputChange}
 					></SmallBio>
 					<Education
-						value={this.state.education}
+						edList={this.state.education}
 						handleInput={this.handleEducationChange}
+						add={this.addEducation}
 					></Education>
 
 					<input
