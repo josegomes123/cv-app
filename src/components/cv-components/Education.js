@@ -17,8 +17,8 @@ class Education extends Component {
 
 
 	render() {
-		const { edList } = this.state;
-		const educationList = edList.map((edBlock) => (
+		const { value, handleInput } = this.props;
+		const educationList = value.map((edBlock) => (
 			<EducationBlock
 				// key={task.id}
 				// id={task.id}
@@ -36,8 +36,8 @@ class Education extends Component {
 						</h1>
 					</div>
 
-					<hr class="border-0 bg-gray-500 text-gray-500 h-px m-1"></hr>
-					<EducationBlock handleInput="{handleInputChange}"></EducationBlock>
+					<hr className="border-0 bg-gray-500 text-gray-500 h-px m-1"></hr>
+					<EducationBlock handleInput={handleInput} value={value}></EducationBlock>
 					<button
 						onClick={this.addEducation}
 						className="transform border border-gray-200 bg-gray-200 text-gray-700 shadow rounded-md px-3 py-2 m-2 transition duration-150 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline active:scale-95"

@@ -27,8 +27,8 @@ class CV extends Component {
 					id: 0,
 					company: '',
 					position: '',
-					startdate: '',
-					enddate: '',
+					startDate: '',
+					endDate: '',
 				},
 			],
 			// needs default blank object for initial render
@@ -37,13 +37,13 @@ class CV extends Component {
 					id: 0,
 					school: '',
 					degree: '',
-					startdate: '',
-					enddate: '',
+					startDate: '',
+					endDate: '',
 				},
 			],
 		};
-
 		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleEducationChange = this.handleEducationChange.bind(this);
 	}
 
 	handleInputChange(event) {
@@ -60,7 +60,15 @@ class CV extends Component {
 		console.log(this.state);
 	};
 
-	handleEducation = () => {};
+	handleEducationChange(inputBlock) {
+		const updatedEdBlock = this.state.education.map((obj) => {
+			return inputBlock.id === obj.id ? inputBlock : obj;
+		});
+		this.setState({
+			education: updatedEdBlock,
+		});
+		console.log(this.state);
+	}
 
 	render() {
 		return (
@@ -97,7 +105,10 @@ class CV extends Component {
 						value={this.state.bio}
 						handleInput={this.handleInputChange}
 					></SmallBio>
-					<Education handleInput={this.handleInputChange}></Education>
+					<Education
+						value={this.state.education}
+						handleInput={this.handleEducationChange}
+					></Education>
 
 					<input
 						className="col-start-1 col-end-11 row-start-6 transform border border-gray-200 bg-gray-200 text-gray-700 shadow rounded-md px-3 py-2 m-2 transition duration-150 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline active:scale-95"

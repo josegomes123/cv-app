@@ -6,11 +6,11 @@ class EducationBlock extends Component {
 		super(props);
 		this.deleteBlock = this.deleteBlock.bind(this);
 		this.state = {
-			id: props.id,
-			school: props.school,
-			degree: props.degree,
-			startdate: props.startDate,
-			enddate: props.endDate,
+			id: this.props.value.id,
+			school: this.props.value.school,
+			degree: this.props.value.degree,
+			startdate: this.props.value.startDate,
+			enddate: this.props.value.endDate,
 		};
 	}
 
@@ -19,10 +19,12 @@ class EducationBlock extends Component {
 	}
 
 	handleInput = (event) => {
+		console.log(event.target);
 		this.setState({
-			[event.name]: event.target.value,
+			[event.target.name]: event.target.value,
 		});
-		// this.props.handleInput
+		console.log('EDBlock state ' + JSON.stringify(this.state));
+		this.props.handleInput(this.state);
 	};
 
 	formatDate(date) {
@@ -38,6 +40,7 @@ class EducationBlock extends Component {
 	}
 
 	render() {
+		console.log(JSON.stringify(this.state));
 		const { id, school, degree, startDate, endDate } = this.state;
 		return (
 			<div className="m-2 grid grid-cols-3 grid-rows-3">
@@ -60,7 +63,7 @@ class EducationBlock extends Component {
 					required
 				></input>
 				<div className="col-start-4 row-start-1 justify-self-end">
-					<label className="mx-2" for="start">
+					<label className="mx-2" htmlFor="start">
 						Start date:
 					</label>
 					<input
@@ -74,8 +77,8 @@ class EducationBlock extends Component {
 						required
 					></input>
 				</div>
-				<div  className="col-start-4 row-start-2 justify-self-end">
-					<label className="mx-2" for="end">
+				<div className="col-start-4 row-start-2 justify-self-end">
+					<label className="mx-2" htmlFor="end">
 						End date:
 					</label>
 					<input
@@ -93,8 +96,8 @@ class EducationBlock extends Component {
 			 align-middle transform border border-gray-200 bg-gray-200 text-gray-700 shadow rounded-md px-3 py-2 m-2 transition duration-150 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline active:scale-95"
 					onClick={() => this.deleteBlock()}
 				>
-					<MdDeleteForever className="text-2xl inline align-middle"></MdDeleteForever>Delete
-					
+					<MdDeleteForever className="text-2xl inline align-middle"></MdDeleteForever>
+					Delete
 				</button>
 			</div>
 		);
