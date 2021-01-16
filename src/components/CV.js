@@ -8,6 +8,9 @@ import Location from './cv-components/Location';
 import Phone from './cv-components/Phone';
 import Photo from './cv-components/Photo';
 import Education from './cv-components/Education';
+import Experience from './cv-components/Experience';
+import { MdSend } from 'react-icons/md';
+
 
 class CV extends Component {
 	constructor(props) {
@@ -29,6 +32,7 @@ class CV extends Component {
 					position: '',
 					startDate: '',
 					endDate: '',
+					jobDescription: '',
 				},
 			],
 			// needs default blank object for initial render
@@ -46,6 +50,7 @@ class CV extends Component {
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleEducationChange = this.handleEducationChange.bind(this);
+		this.handleExperienceChange = this.handleExperienceChange.bind(this);
 	}
 
 	handleInputChange(event) {
@@ -84,13 +89,46 @@ class CV extends Component {
 		});
 		this.setState({
 			edCount: this.state.edCount + 1,
-		})
+		});
 	};
 
 	handleEducationDelete = (id) => {
 		console.log(`deleting education block with ID ${id}`);
 		this.setState((prevState) => ({
 			education: prevState.education.filter((edBlock) => edBlock.id !== id),
+		}));
+	};
+
+	handleExperienceChange(inputBlock) {
+		const updatedExpBlock = this.state.experience.map((obj) => {
+			return inputBlock.id === obj.id ? inputBlock : obj;
+		});
+		this.setState({
+			experience: updatedExpBlock,
+		});
+		console.log(this.state);
+	}
+
+	handleExperienceAdd = () => {
+		this.setState({
+			experience: this.state.experience.concat({
+				id: this.state.expCount + 1,
+				company: '',
+				position: '',
+				startDate: '',
+				endDate: '',
+				jobDescription: '',
+			}),
+		});
+		this.setState({
+			expCount: this.state.expCount + 1,
+		});
+	};
+
+	handleExperienceDelete = (id) => {
+		console.log(`deleting experience block with ID ${id}`);
+		this.setState((prevState) => ({
+			experience: prevState.experience.filter((expBlock) => expBlock.id !== id),
 		}));
 	};
 
@@ -135,12 +173,17 @@ class CV extends Component {
 						add={this.handleEducationAdd}
 						del={this.handleEducationDelete}
 					></Education>
+					<Experience
+						experienceList={this.state.experience}
+						handleInput={this.handleExperienceChange}
+						add={this.handleExperienceAdd}
+						del={this.handleExperienceDelete}
+					></Experience>
 
-					<input
-						className="col-start-1 col-end-11 row-start-6 transform border border-gray-200 bg-gray-200 text-gray-700 shadow rounded-md px-3 py-2 m-2 transition duration-150 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline active:scale-95"
+					<button
+						className="col-start-1 col-end-11 place-self-center my-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
 						type="submit"
-						value="submit"
-					></input>
+					><MdSend  className="text-2xl mr-2 inline align-top"></MdSend>Submit</button>
 				</div>
 			</div>
 		);

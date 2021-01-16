@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 
-class EducationBlock extends Component {
+class ExperienceBlock extends Component {
 	constructor(props) {
 		super(props);
 		this.deleteBlock = this.deleteBlock.bind(this);
 		this.state = {
 			id: this.props.value.id,
-			school: this.props.value.school,
-			degree: this.props.value.degree,
+			position: this.props.value.position,
+			company: this.props.value.company,
 			startdate: this.formatDate(new Date()),
 			enddate: this.formatDate(new Date()),
+			jobDescription: this.props.value.jobDescription,
 		};
 	}
 
@@ -38,24 +39,31 @@ class EducationBlock extends Component {
 	}
 
 	render() {
-		const { id, school, degree, startDate, endDate } = this.state;
+		const {
+			id,
+			position,
+			company,
+			startDate,
+			endDate,
+			jobDescription,
+		} = this.state;
 		return (
-			<div className="m-2 grid grid-cols-3 grid-rows-3">
+			<div className="m-2 grid grid-cols-3 grid-rows-3 place-content-start auto-rows-auto">
 				<input
-					className="col-start-1 col-span-3 row-start-1 pl-2 m-1 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
+					className="col-start-1 col-span-3 h-10 row-start-1 pl-2 m-1 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
 					type="text"
-					name="school"
-					placeholder="Your school here"
-					value={school}
+					name="position"
+					placeholder="Your position here"
+					value={position}
 					onChange={this.handleInput}
 					required
 				></input>
 				<input
-					className="col-start-1 col-span-3 row-start-2 pl-2 m-1 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
+					className="col-start-1 col-span-3  h-10 row-start-2 pl-2 m-1 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
 					type="text"
-					name="degree"
-					placeholder="Your degree here"
-					value={degree}
+					name="company"
+					placeholder="Your company here"
+					value={company}
 					onChange={this.handleInput}
 					required
 				></input>
@@ -88,12 +96,21 @@ class EducationBlock extends Component {
 						max={this.formatDate(new Date())}
 					></input>
 				</div>
+                <textarea
+						className="row-start-3 col-start-1 col-span-3  pl-2 m-1 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
+						type="text"
+						rows="3"
+						name="jobDescription"
+						placeholder="Job description here (optional)"
+						value={jobDescription}
+						onChange={this.handleInput}
+					></textarea>
 				<button
 					className="col-start-4 row-start-3 justify-self-end
-			 align-middle transform border border-red-200 bg-red-200  text-red-700 font-medium shadow rounded-md px-3 py-2 m-2 transition duration-150 ease select-none hover:bg-red-300 focus:outline-none focus:shadow-outline active:scale-95"
+			 align-middle transform border border-gray-200 bg-gray-200 text-gray-700 shadow rounded-md px-3 py-2 m-2 transition duration-150 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline active:scale-95"
 					onClick={() => this.deleteBlock()}
 				>
-					<MdDeleteForever className="text-2xl mr-2 inline align-top"></MdDeleteForever>
+					<MdDeleteForever className="text-2xl inline align-middle"></MdDeleteForever>
 					Delete
 				</button>
 			</div>
@@ -101,4 +118,4 @@ class EducationBlock extends Component {
 	}
 }
 
-export default EducationBlock;
+export default ExperienceBlock;
