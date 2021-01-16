@@ -9,8 +9,8 @@ class EducationBlock extends Component {
 			id: this.props.value.id,
 			school: this.props.value.school,
 			degree: this.props.value.degree,
-			startdate: this.formatDate(new Date()),
-			enddate: this.formatDate(new Date()),
+			startDate: this.props.value.startDate,
+			endDate:this.props.value.endDate,
 		};
 	}
 
@@ -38,11 +38,11 @@ class EducationBlock extends Component {
 	}
 
 	render() {
-		const { id, school, degree, startDate, endDate } = this.state;
+		const {school, degree, startDate, endDate } = this.state;
 		return (
 			<div className="m-2 grid grid-cols-3 grid-rows-3">
 				<input
-					className="col-start-1 col-span-3 row-start-1 pl-2 m-1 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
+					className="col-start-1 col-span-3 row-start-1 pl-2 m-1 rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:outline-none focus:ring focus:border-blue-300"
 					type="text"
 					name="school"
 					placeholder="Your school here"
@@ -51,7 +51,7 @@ class EducationBlock extends Component {
 					required
 				></input>
 				<input
-					className="col-start-1 col-span-3 row-start-2 pl-2 m-1 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
+					className="col-start-1 col-span-3 row-start-2 pl-2 m-1 rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:outline-none focus:ring focus:border-blue-300"
 					type="text"
 					name="degree"
 					placeholder="Your degree here"
@@ -64,7 +64,7 @@ class EducationBlock extends Component {
 						Start date:
 					</label>
 					<input
-						className="pl-2 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
+						className="pl-2 rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500  focus:outline-none focus:ring focus:border-blue-300"
 						type="date"
 						id="start"
 						name="startDate"
@@ -79,7 +79,7 @@ class EducationBlock extends Component {
 						End date:
 					</label>
 					<input
-						className="ml-2 pl-2 inline-block rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:border-blue-500 focus:border-black focus:outline-none focus:ring focus:border-blue-300"
+						className="ml-2 pl-2 rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:outline-none focus:ring focus:border-blue-300"
 						type="date"
 						id="end"
 						name="endDate"
