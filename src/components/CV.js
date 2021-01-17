@@ -45,7 +45,7 @@ class CV extends Component {
 					endDate: '',
 				},
 			],
-			skills: [],
+			skills: [''],
 			edCount: 0,
 			expCount: 0,
 		};
@@ -130,6 +130,30 @@ class CV extends Component {
 		console.log(`deleting experience block with ID ${id}`);
 		this.setState((prevState) => ({
 			experience: prevState.experience.filter((expBlock) => expBlock.id !== id),
+		}));
+	};
+
+
+	handleSkillChange(inputBlock) {
+		const updatedSkillBlock = this.state.skill.map((obj) => {
+			return inputBlock.id === obj.id ? inputBlock : obj;
+		});
+		this.setState({
+			skill: updatedSkillBlock,
+		});
+		console.log(this.state);
+	}
+
+	handleSkillAdd = (value) => {
+		this.setState({
+			skill: this.state.skill.push(value),
+		});
+	};
+
+	handleSkillDelete = (id) => {
+		console.log(`deleting skill block with ID ${id}`);
+		this.setState((prevState) => ({
+			skill: prevState.skill.filter((skillBlock) => skillBlock.id !== id),
 		}));
 	};
 
