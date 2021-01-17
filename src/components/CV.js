@@ -10,7 +10,7 @@ import Photo from './cv-components/Photo';
 import Education from './cv-components/Education';
 import Experience from './cv-components/Experience';
 import { MdSend } from 'react-icons/md';
-
+import Skills from './cv-components/Skills';
 
 class CV extends Component {
 	constructor(props) {
@@ -45,6 +45,7 @@ class CV extends Component {
 					endDate: '',
 				},
 			],
+			skills: [],
 			edCount: 0,
 			expCount: 0,
 		};
@@ -141,7 +142,7 @@ class CV extends Component {
 						value={this.state.name}
 						handleInput={this.handleInputChange}
 					></NameInput>
-					<div className="col-start-9 col-end-11 row-start-1 row-end-3">
+					<div className="col-start-9 col-end-11 row-start-1 row-end-3 justify-self-end">
 						<Location
 							value={this.state.location}
 							handleInput={this.handleInputChange}
@@ -179,11 +180,19 @@ class CV extends Component {
 						add={this.handleExperienceAdd}
 						del={this.handleExperienceDelete}
 					></Experience>
+					<Skills
+						skillList={this.state.skills}
+						handleInput={this.handleSkillChange}
+						add={this.handleSkillAdd}
+						del={this.handleSkillDelete}
+					></Skills>
 
 					<button
 						className="col-start-1 col-end-11 place-self-center my-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
 						type="submit"
-					><MdSend  className="text-2xl mr-2 inline align-top"></MdSend>Submit</button>
+					>
+						<MdSend className="text-2xl mr-2 inline align-top"></MdSend>Submit
+					</button>
 				</div>
 			</div>
 		);

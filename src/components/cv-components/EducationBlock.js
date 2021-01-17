@@ -10,7 +10,7 @@ class EducationBlock extends Component {
 			school: this.props.value.school,
 			degree: this.props.value.degree,
 			startDate: this.props.value.startDate,
-			endDate:this.props.value.endDate,
+			endDate: this.props.value.endDate,
 		};
 	}
 
@@ -38,7 +38,7 @@ class EducationBlock extends Component {
 	}
 
 	render() {
-		const {school, degree, startDate, endDate } = this.state;
+		const { school, degree, startDate, endDate } = this.state;
 		return (
 			<div className="m-2 grid grid-cols-3 grid-rows-3">
 				<input
