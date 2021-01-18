@@ -45,7 +45,7 @@ class CV extends Component {
 					endDate: '',
 				},
 			],
-			skills: [''],
+			skills: [],
 			edCount: 0,
 			expCount: 0,
 		};
@@ -60,7 +60,6 @@ class CV extends Component {
 		this.setState({
 			[key]: value,
 		});
-		console.log(this.state);
 	}
 
 	handleSubmit = (event) => {
@@ -75,7 +74,6 @@ class CV extends Component {
 		this.setState({
 			education: updatedEdBlock,
 		});
-		console.log(this.state);
 	}
 
 	handleEducationAdd = () => {
@@ -107,7 +105,6 @@ class CV extends Component {
 		this.setState({
 			experience: updatedExpBlock,
 		});
-		console.log(this.state);
 	}
 
 	handleExperienceAdd = () => {
@@ -133,28 +130,28 @@ class CV extends Component {
 		}));
 	};
 
+	// handleSkillChange(inputBlock) {
+	// 	const updatedSkillBlock = this.state.skill.map((obj) => {
+	// 		return inputBlock.id === obj.id ? inputBlock : obj;
+	// 	});
+	// 	this.setState({
+	// 		skill: updatedSkillBlock,
+	// 	});
+	// }
 
-	handleSkillChange(inputBlock) {
-		const updatedSkillBlock = this.state.skill.map((obj) => {
-			return inputBlock.id === obj.id ? inputBlock : obj;
-		});
+	handleSkillAdd = (skillAdd, idAdd) => {
 		this.setState({
-			skill: updatedSkillBlock,
+			skills: this.state.skills.concat({ skillName: skillAdd, id: idAdd }),
 		});
-		console.log(this.state);
-	}
-
-	handleSkillAdd = (value) => {
-		this.setState({
-			skill: this.state.skill.push(value),
-		});
+		console.log(this.state.skills);
 	};
 
 	handleSkillDelete = (id) => {
 		console.log(`deleting skill block with ID ${id}`);
 		this.setState((prevState) => ({
-			skill: prevState.skill.filter((skillBlock) => skillBlock.id !== id),
+			skills: prevState.skills.filter((skillBlock) => skillBlock.id !== parseInt(id)),
 		}));
+		console.log(this.state.skills);
 	};
 
 	render() {
@@ -206,13 +203,13 @@ class CV extends Component {
 					></Experience>
 					<Skills
 						skillList={this.state.skills}
-						handleInput={this.handleSkillChange}
+						//handleInput={this.handleSkillChange}
 						add={this.handleSkillAdd}
 						del={this.handleSkillDelete}
 					></Skills>
 
 					<button
-						className="col-start-1 col-end-11 place-self-center my-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
+						className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
 						type="submit"
 					>
 						<MdSend className="text-2xl mr-2 inline align-top"></MdSend>Submit

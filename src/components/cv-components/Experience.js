@@ -14,7 +14,7 @@ function Experience({ experienceList, handleInput, add, del }) {
 	));
 
 	return (
-		<div className="row-start-12 row-end-auto row-auto col-start-1 col-end-11">
+		<div className="mt-4 row-start-12 row-end-auto row-auto col-start-1 col-end-11">
 			<div className="">
 				<div>
 					<MdWork className="inline w-12 h-12 m-2"></MdWork>
