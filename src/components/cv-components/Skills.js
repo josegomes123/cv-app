@@ -32,8 +32,7 @@ class Skills extends Component {
 		});
 	};
 
-
-    // To add skills with enter key
+	// To add skills with enter key
 	onKeyDown = (event) => {
 		// 'keypress' event misbehaves on mobile so we track 'Enter' key via 'keydown' event
 		if (event.key === 'Enter') {
@@ -92,7 +91,6 @@ class Skills extends Component {
 							value={this.state.skillName}
 							onChange={this.handleChange}
 							onKeyDown={this.onKeyDown}
-							required
 						></input>
 						<button
 							onClick={this.handleSubmit}

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 import NameInput from './cv-components/NameInput';
 import SmallBio from './cv-components/SmallBio';
 import Email from './cv-components/Email';
@@ -54,6 +56,7 @@ class CV extends Component {
 		this.handleExperienceChange = this.handleExperienceChange.bind(this);
 	}
 
+	// General Input Fields Features
 	handleInputChange(event) {
 		let value = event.target.value;
 		let key = event.target.name;
@@ -62,11 +65,9 @@ class CV extends Component {
 		});
 	}
 
-	handleSubmit = (event) => {
-		event.preventDefault();
-		console.log(this.state);
-	};
-
+	/**
+	 * Education Manipulation Features
+	 */
 	handleEducationChange(inputBlock) {
 		const updatedEdBlock = this.state.education.map((obj) => {
 			return inputBlock.id === obj.id ? inputBlock : obj;
@@ -98,6 +99,9 @@ class CV extends Component {
 		}));
 	};
 
+	/**
+	 * Experience Manipulation Features
+	 */
 	handleExperienceChange(inputBlock) {
 		const updatedExpBlock = this.state.experience.map((obj) => {
 			return inputBlock.id === obj.id ? inputBlock : obj;
@@ -130,15 +134,9 @@ class CV extends Component {
 		}));
 	};
 
-	// handleSkillChange(inputBlock) {
-	// 	const updatedSkillBlock = this.state.skill.map((obj) => {
-	// 		return inputBlock.id === obj.id ? inputBlock : obj;
-	// 	});
-	// 	this.setState({
-	// 		skill: updatedSkillBlock,
-	// 	});
-	// }
-
+	/**
+	 * Skill Manipulation Features
+	 */
 	handleSkillAdd = (skillAdd, idAdd) => {
 		this.setState({
 			skills: this.state.skills.concat({ skillName: skillAdd, id: idAdd }),
@@ -149,72 +147,104 @@ class CV extends Component {
 	handleSkillDelete = (id) => {
 		console.log(`deleting skill block with ID ${id}`);
 		this.setState((prevState) => ({
-			skills: prevState.skills.filter((skillBlock) => skillBlock.id !== parseInt(id)),
+			skills: prevState.skills.filter(
+				(skillBlock) => skillBlock.id !== parseInt(id)
+			),
 		}));
 		console.log(this.state.skills);
+	};
+
+	/**
+	 * Education Manipulation Features
+	 */
+	handleSubmit = (event) => {
+		event.preventDefault();
+		console.log(this.state);
+		// Default export is a4 paper, portrait, using millimeters for units
+		this.generatePDF();
+	};
+
+	generatePDF = () => {
+		var doc = new jsPDF('p', 'mm', 'a4');
+		html2canvas(document.querySelector('#full-cv')).then((canvas) => {
+			const imgData = canvas.toDataURL('image/jpeg');
+			const pdf = new jsPDF('p', 'pt', 'a4');
+			var options = { pagesplit: true };
+			const imgProps = pdf.getImageProperties(imgData);
+			const pdfWidth = pdf.internal.pageSize.getWidth();
+			const pdfHeight = pdf.internal.pageSize.height;
+			pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, 'cv', 'NONE');
+			pdf.save('download.pdf', options);
+		});
 	};
 
 	render() {
 		return (
 			<div>
-				<div className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-auto m-6">
-					<Photo></Photo>
-					<NameInput
-						value={this.state.name}
-						handleInput={this.handleInputChange}
-					></NameInput>
-					<div className="col-start-9 col-end-11 row-start-1 row-end-3 justify-self-end">
-						<Location
-							value={this.state.location}
-							handleInput={this.handleInputChange}
-						></Location>
-						<Phone
-							value={this.state.phone}
-							handleInput={this.handleInputChange}
-						></Phone>
-						<Email
-							value={this.state.email}
-							handleInput={this.handleInputChange}
-						></Email>
-						<LinkedIn
-							value={this.state.linkedin}
-							handleInput={this.handleInputChange}
-						></LinkedIn>
-						<Github
-							value={this.state.github}
-							handleInput={this.handleInputChange}
-						></Github>
-					</div>
-					<SmallBio
-						value={this.state.bio}
-						handleInput={this.handleInputChange}
-					></SmallBio>
-					<Education
-						educationList={this.state.education}
-						handleInput={this.handleEducationChange}
-						add={this.handleEducationAdd}
-						del={this.handleEducationDelete}
-					></Education>
-					<Experience
-						experienceList={this.state.experience}
-						handleInput={this.handleExperienceChange}
-						add={this.handleExperienceAdd}
-						del={this.handleExperienceDelete}
-					></Experience>
-					<Skills
-						skillList={this.state.skills}
-						//handleInput={this.handleSkillChange}
-						add={this.handleSkillAdd}
-						del={this.handleSkillDelete}
-					></Skills>
-
-					<button
-						className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
-						type="submit"
+				<form>
+					<div
+						id="full-cv"
+						className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-auto m-6"
 					>
-						<MdSend className="text-2xl mr-2 inline align-top"></MdSend>Submit
-					</button>
-				</div>
+						<Photo></Photo>
+						<NameInput
+							value={this.state.name}
+							handleInput={this.handleInputChange}
+						></NameInput>
+						<div className="col-start-9 col-end-11 row-start-1 row-end-3 justify-self-end">
+							<Location
+								value={this.state.location}
+								handleInput={this.handleInputChange}
+							></Location>
+							<Phone
+								value={this.state.phone}
+								handleInput={this.handleInputChange}
+							></Phone>
+							<Email
+								value={this.state.email}
+								handleInput={this.handleInputChange}
+							></Email>
+							<LinkedIn
+								value={this.state.linkedin}
+								handleInput={this.handleInputChange}
+							></LinkedIn>
+							<Github
+								value={this.state.github}
+								handleInput={this.handleInputChange}
+							></Github>
+						</div>
+						<SmallBio
+							value={this.state.bio}
+							handleInput={this.handleInputChange}
+						></SmallBio>
+						<Education
+							educationList={this.state.education}
+							handleInput={this.handleEducationChange}
+							add={this.handleEducationAdd}
+							del={this.handleEducationDelete}
+						></Education>
+						<Experience
+							experienceList={this.state.experience}
+							handleInput={this.handleExperienceChange}
+							add={this.handleExperienceAdd}
+							del={this.handleExperienceDelete}
+						></Experience>
+						<Skills
+							skillList={this.state.skills}
+							add={this.handleSkillAdd}
+							del={this.handleSkillDelete}
+						></Skills>
+
+						<button
+							className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
+							type="submit"
+							onClick={this.handleSubmit}
+						>
+							<MdSend className="text-2xl mr-2 inline align-top"></MdSend>Submit
+						</button>
+					</div>
+				</form>
+				<div>Test</div>
 			</div>
 		);
 	}
