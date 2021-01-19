@@ -48,6 +48,7 @@ class CV extends Component {
 				},
 			],
 			skills: [],
+			previewMode: false,
 			edCount: 0,
 			expCount: 0,
 		};
@@ -160,8 +161,9 @@ class CV extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		console.log(this.state);
+		this.setState({ previewMode: true });
 		// Default export is a4 paper, portrait, using millimeters for units
-		this.generatePDF();
+		// this.generatePDF();
 	};
 
 	generatePDF = () => {
@@ -190,6 +192,7 @@ class CV extends Component {
 						<NameInput
 							value={this.state.name}
 							handleInput={this.handleInputChange}
+							previewMode={this.state.previewMode}
 						></NameInput>
 						<div className="col-start-9 col-end-11 row-start-1 row-end-3 justify-self-end">
 							<Location
@@ -216,6 +219,7 @@ class CV extends Component {
 						<SmallBio
 							value={this.state.bio}
 							handleInput={this.handleInputChange}
+							previewMode={this.state.previewMode}
 						></SmallBio>
 						<Education
 							educationList={this.state.education}

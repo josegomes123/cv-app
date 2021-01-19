@@ -44,7 +44,6 @@ class Skills extends Component {
 
 	renderSkillList = () => {
 		const skillList = this.props.skillList;
-		const del = this.props.del;
 		const sList = skillList.map((skillBlock) => {
 			return (
 				<li key={skillBlock.id}>
