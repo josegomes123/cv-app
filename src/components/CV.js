@@ -57,6 +57,10 @@ class CV extends Component {
 		this.handleExperienceChange = this.handleExperienceChange.bind(this);
 	}
 
+	// renderInfoBox = () => {
+
+	// }
+
 	// General Input Fields Features
 	handleInputChange(event) {
 		let value = event.target.value;
@@ -198,22 +202,27 @@ class CV extends Component {
 							<Location
 								value={this.state.location}
 								handleInput={this.handleInputChange}
+								previewMode={this.state.previewMode}
 							></Location>
 							<Phone
 								value={this.state.phone}
 								handleInput={this.handleInputChange}
+								previewMode={this.state.previewMode}
 							></Phone>
 							<Email
 								value={this.state.email}
 								handleInput={this.handleInputChange}
+								previewMode={this.state.previewMode}
 							></Email>
 							<LinkedIn
 								value={this.state.linkedin}
 								handleInput={this.handleInputChange}
+								previewMode={this.state.previewMode}
 							></LinkedIn>
 							<Github
 								value={this.state.github}
 								handleInput={this.handleInputChange}
+								previewMode={this.state.previewMode}
 							></Github>
 						</div>
 						<SmallBio
@@ -248,7 +257,6 @@ class CV extends Component {
 						</button>
 					</div>
 				</form>
-				<div>Test</div>
 			</div>
 		);
 	}

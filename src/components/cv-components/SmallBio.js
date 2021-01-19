@@ -1,7 +1,7 @@
 import React from 'react';
 
 function SmallBio({ value, handleInput, previewMode }) {
-	if (!	previewMode) {
+	if (!previewMode) {
 		return (
 			<div className="col-start-3 col-end-9 row-start-2 row-span-2 self-start">
 				<textarea
@@ -18,16 +18,7 @@ function SmallBio({ value, handleInput, previewMode }) {
 	} else {
 		return (
 			<div className="col-start-3 col-end-9 row-start-2 row-span-2 self-start">
-				<textarea
-					className="w-full bg-white p-2 rounded block  focus:outline-none"
-					type="text"
-					placeholder="Small bio about yourself here"
-					value={value}
-					onChange={handleInput}
-					rows="4"
-					name="bio"
-					disabled
-				></textarea>
+				<p className="w-full bg-white p-2 rounded block  focus:outline-none">{value}</p>
 			</div>
 		);
 	}
