@@ -164,6 +164,7 @@ class CV extends Component {
 	 */
 	handleSubmit = (event) => {
 		event.preventDefault();
+		event.stopPropagation();
 		console.log(this.state);
 		this.setState({ previewMode: true });
 		// Default export is a4 paper, portrait, using millimeters for units
@@ -187,49 +188,54 @@ class CV extends Component {
 	render() {
 		return (
 			<div>
-				<form>
+				<form onSubmit={this.handleSubmit}>
 					<div
 						id="full-cv"
 						className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-auto m-6"
 					>
-						<Photo></Photo>
-						<NameInput
-							value={this.state.name}
-							handleInput={this.handleInputChange}
-							previewMode={this.state.previewMode}
-						></NameInput>
-						<div className="col-start-9 col-end-11 row-start-1 row-end-3 justify-self-end">
-							<Location
-								value={this.state.location}
-								handleInput={this.handleInputChange}
-								previewMode={this.state.previewMode}
-							></Location>
-							<Phone
-								value={this.state.phone}
-								handleInput={this.handleInputChange}
-								previewMode={this.state.previewMode}
-							></Phone>
-							<Email
-								value={this.state.email}
-								handleInput={this.handleInputChange}
-								previewMode={this.state.previewMode}
-							></Email>
-							<LinkedIn
-								value={this.state.linkedin}
-								handleInput={this.handleInputChange}
-								previewMode={this.state.previewMode}
-							></LinkedIn>
-							<Github
-								value={this.state.github}
-								handleInput={this.handleInputChange}
-								previewMode={this.state.previewMode}
-							></Github>
+						<div className="flex flex-row col-start-1 col-span-full row-start-1">
+							<Photo previewMode={this.state.previewMode}></Photo>
+							<div>
+								<NameInput
+									value={this.state.name}
+									handleInput={this.handleInputChange}
+									previewMode={this.state.previewMode}
+								></NameInput>
+								<SmallBio
+									value={this.state.bio}
+									handleInput={this.handleInputChange}
+									previewMode={this.state.previewMode}
+								></SmallBio>
+							</div>
+							{/* // className="col-start-9 col-end-11 row-start-1 row-end-3 justify-self-end" */}
+							<div className="place-self-end justify-self-end">
+								<Location
+									value={this.state.location}
+									handleInput={this.handleInputChange}
+									previewMode={this.state.previewMode}
+								></Location>
+								<Phone
+									value={this.state.phone}
+									handleInput={this.handleInputChange}
+									previewMode={this.state.previewMode}
+								></Phone>
+								<Email
+									value={this.state.email}
+									handleInput={this.handleInputChange}
+									previewMode={this.state.previewMode}
+								></Email>
+								<LinkedIn
+									value={this.state.linkedin}
+									handleInput={this.handleInputChange}
+									previewMode={this.state.previewMode}
+								></LinkedIn>
+								<Github
+									value={this.state.github}
+									handleInput={this.handleInputChange}
+									previewMode={this.state.previewMode}
+								></Github>
+							</div>
 						</div>
-						<SmallBio
-							value={this.state.bio}
-							handleInput={this.handleInputChange}
-							previewMode={this.state.previewMode}
-						></SmallBio>
 						<Education
 							educationList={this.state.education}
 							handleInput={this.handleEducationChange}
@@ -251,7 +257,6 @@ class CV extends Component {
 						<button
 							className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
 							type="submit"
-							onClick={this.handleSubmit}
 						>
 							<MdSend className="text-2xl mr-2 inline align-top"></MdSend>Submit
 						</button>

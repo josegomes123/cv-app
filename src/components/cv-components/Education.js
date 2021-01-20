@@ -4,7 +4,6 @@ import EducationBlock from './EducationBlock';
 import { IoMdAddCircle } from 'react-icons/io';
 
 function Education({ educationList, handleInput, add, del }) {
-	// const { educationList, handleInput, add, del } = this.props;
 	const edList = educationList.map((edBlock) => (
 		<EducationBlock
 			key={edBlock.id}

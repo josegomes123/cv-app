@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import photoPlaceholder from '../../assets/photo-placeholder.png';
 
-function Photo() {
+function Photo({previewMode}) {
 	let photo;
 	// const [picture, setPicture] = useState(null);
 	const [imgData, setImgData] = useState(null);
@@ -25,7 +25,11 @@ function Photo() {
 		photo = (
 			<div>
 				<label htmlFor="profilePic">
-					<img className="w-40 cursor-pointer shadow-lg rounded align-middle border-none" src={photoPlaceholder} alt=""/>
+					<img
+						className="w-40 cursor-pointer shadow-lg rounded align-middle border-none"
+						src={photoPlaceholder}
+						alt=""
+					/>
 				</label>
 				<input
 					className="hidden"
@@ -36,10 +40,24 @@ function Photo() {
 			</div>
 		);
 	} else {
-		photo = <img className="w-40 h-40 object-contain shadow-lg rounded align-middle border-none" src={imgData} alt=""/>;
+		photo = (
+			<img
+				className="w-40 h-40 object-contain shadow-lg rounded align-middle border-none"
+				src={imgData}
+				alt=""
+			/>
+		);
 	}
 
-	return <div className="place-self-center col-start-1 row-start-1 col-span-2 row-span-2">{photo}</div>;
+	if (!previewMode) {
+		return (
+			<div className="place-self-center col-start-1 row-start-1 col-span-2 row-span-2">
+				{photo}
+			</div>
+		);
+	} else {
+		return null;
+	}
 }
 
 export default Photo;
