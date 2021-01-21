@@ -193,9 +193,9 @@ class CV extends Component {
 						id="full-cv"
 						className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-auto m-6"
 					>
-						<div className="flex flex-row col-start-1 col-span-full row-start-1">
+						<div className="flex flex-row flex-shrink-0 col-start-1 col-span-full row-start-1 justify-between">
 							<Photo previewMode={this.state.previewMode}></Photo>
-							<div>
+							<div className="w-full px-10">
 								<NameInput
 									value={this.state.name}
 									handleInput={this.handleInputChange}
@@ -208,7 +208,7 @@ class CV extends Component {
 								></SmallBio>
 							</div>
 							{/* // className="col-start-9 col-end-11 row-start-1 row-end-3 justify-self-end" */}
-							<div className="place-self-end justify-self-end">
+							<div className="place-self-end">
 								<Location
 									value={this.state.location}
 									handleInput={this.handleInputChange}
@@ -241,6 +241,7 @@ class CV extends Component {
 							handleInput={this.handleEducationChange}
 							add={this.handleEducationAdd}
 							del={this.handleEducationDelete}
+							previewMode={this.state.previewMode}
 						></Education>
 						<Experience
 							experienceList={this.state.experience}

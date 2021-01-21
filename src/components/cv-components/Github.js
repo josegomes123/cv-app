@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoMarkGithub } from 'react-icons/go';
-import {cleanURL} from "./PreviewGenerator"
+import { cleanURL } from './PreviewGenerator';
 
 function Github({ value, handleInput, previewMode }) {
 	if (!previewMode) {
@@ -17,20 +17,20 @@ function Github({ value, handleInput, previewMode }) {
 				></input>
 			</div>
 		);
-		} else {
-			if (value !== '') {
-				return (
-					<div className="flex flex-column items-center m-1">
-						<GoMarkGithub className="flex-shrink-0 text-2xl m-2" />
-						<div className="pl-2 mb-1 text-lg bg-white font-medium">
-							<a href={value}>{cleanURL(value)}</a>
-						</div>
+	} else {
+		if (value !== '') {
+			return (
+				<div className="flex flex-column items-center m-1">
+					<GoMarkGithub className="flex-shrink-0 text-2xl m-2" />
+					<div className="pl-2 mb-1 text-lg bg-white font-medium">
+						<a href={value}>{cleanURL(value)}</a>
 					</div>
-				);
-			} else {
-				return null;
-			}
+				</div>
+			);
+		} else {
+			return null;
 		}
+	}
 }
 
 export default Github;
