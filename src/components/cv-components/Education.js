@@ -27,7 +27,6 @@ function Education({ educationList, handleInput, add, del, previewMode }) {
 							Education
 						</h1>
 					</div>
-
 					<hr className="border-0 bg-gray-500 text-gray-500 h-px m-1"></hr>
 					{edList}
 				</div>
@@ -43,7 +42,6 @@ function Education({ educationList, handleInput, add, del, previewMode }) {
 							Education
 						</h1>
 					</div>
-
 					<hr className="border-0 bg-gray-500 text-gray-500 h-px m-1"></hr>
 					{edList}
 					<button

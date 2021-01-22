@@ -51,7 +51,7 @@ class EducationBlock extends Component {
 					</div>
 					<div className="w-full col-span-full">
 						<p className="">
-							{this.formatDate(startDate, false)} -{' '}
+							{this.formatDate(startDate, false)} - 
 							{this.formatDate(startDate, false)}
 						</p>
 					</div>

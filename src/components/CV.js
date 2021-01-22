@@ -248,11 +248,13 @@ class CV extends Component {
 							handleInput={this.handleExperienceChange}
 							add={this.handleExperienceAdd}
 							del={this.handleExperienceDelete}
+							previewMode={this.state.previewMode}
 						></Experience>
 						<Skills
 							skillList={this.state.skills}
 							add={this.handleSkillAdd}
 							del={this.handleSkillDelete}
+							previewMode={this.state.previewMode}
 						></Skills>
 
 						<button
