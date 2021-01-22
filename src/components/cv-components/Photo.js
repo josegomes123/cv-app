@@ -51,14 +51,14 @@ function Photo({ previewMode }) {
 
 	if (!previewMode) {
 		return (
-			<div className="flex-shrink-0 place-self-center align-middle col-start-1 row-start-1 col-span-2 row-span-2">
+			<div className="pl-4 pr-8 flex-shrink-0 place-self-center align-middle col-start-1 row-start-1 col-span-2 row-span-2">
 				{photo}
 			</div>
 		);
 	} else {
 		if (photoUploaded) {
 			return (
-				<div className="flex-shrink-0 place-self-center align-middle col-start-1 row-start-1 col-span-2 row-span-2">
+				<div className="pl-4 pr-8 flex-shrink-0 place-self-center align-middle col-start-1 row-start-1 col-span-2 row-span-2">
 					{photo}
 				</div>
 			);

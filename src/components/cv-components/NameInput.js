@@ -17,16 +17,8 @@ function NameInput({ value, handleInput, previewMode }) {
 		);
 	} else {
 		return (
-			<div className="row-start-1 row-span-1 py-2">
-				<input
-					className="appearance-none bg-white w-full text-4xl font-medium p-2 rounded block"
-					type="text"
-					placeholder="Input your name here"
-					value={value}
-					onChange={handleInput}
-					name="name"
-					disabled
-				></input>
+			<div className="row-start-1 row-span-1 my-2">
+				<p className=" bg-white w-full text-4xl font-medium p-2">{value}</p>
 			</div>
 		);
 	}

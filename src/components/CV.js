@@ -195,7 +195,7 @@ class CV extends Component {
 					>
 						<div className="flex flex-row flex-shrink-0 col-start-1 col-span-full row-start-1 justify-between">
 							<Photo previewMode={this.state.previewMode}></Photo>
-							<div className="w-full px-10">
+							<div className="w-full">
 								<NameInput
 									value={this.state.name}
 									handleInput={this.handleInputChange}

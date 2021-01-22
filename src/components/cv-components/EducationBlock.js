@@ -36,7 +36,7 @@ class EducationBlock extends Component {
 		if (withDays) {
 			return [year, month, day].join('-');
 		} else {
-			return [year, month].join('-');
+			return [year, month].join('/');
 		}
 	}
 
@@ -44,20 +44,16 @@ class EducationBlock extends Component {
 		const { school, degree, startDate, endDate } = this.state;
 		if (this.props.previewMode) {
 			return (
-				<div className="m-2 grid grid-cols-3 grid-rows-3">
-					<p className="col-start-1 col-span-3 row-start-1 pl-2 m-1">
-						{school}
-					</p>
-					<p className="col-start-1 col-span-3 row-start-2 pl-2 m-1">
-						{degree}
-					</p>
-					<div className="col-start-4 row-start-1 justify-self-end">
-						<p className="mx-2">Start date:</p>
-						<p className="pl-2">{this.formatDate(startDate, false)}</p>
+				<div className="pl-4 pt-2 grid grid-rows-2 grid-cols-1">
+					<div className="row-start-1">
+						<p className="text-2xl inline mr-10">{school}</p>
+						<p className="inline font-medium text-2xl">{degree}</p>
 					</div>
-					<div className="col-start-4 row-start-2 justify-self-end">
-						<p className="mx-2">End date:</p>
-						<p className="ml-2 pl-2">{this.formatDate(startDate, false)}</p>
+					<div className="w-full col-span-full">
+						<p className="">
+							{this.formatDate(startDate, false)} -{' '}
+							{this.formatDate(startDate, false)}
+						</p>
 					</div>
 				</div>
 			);
