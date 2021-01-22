@@ -22,7 +22,7 @@ function Experience({ experienceList, handleInput, add, del, previewMode }) {
 			<div className="mt-4 row-start-12 row-end-auto row-auto col-start-1 col-end-11">
 				<div className="">
 					<div>
-						<MdWork className="inline w-12 h-12 m-2"></MdWork>
+						<MdWork className=" ml-12 inline w-12 h-12 m-2"></MdWork>
 						<h1 className="inline align-middle text-3xl font-bold">
 							Experience
 						</h1>
@@ -37,7 +37,7 @@ function Experience({ experienceList, handleInput, add, del, previewMode }) {
 			<div className="mt-4 row-start-12 row-end-auto row-auto col-start-1 col-end-11">
 				<div className="">
 					<div>
-						<MdWork className="inline w-12 h-12 m-2"></MdWork>
+						<MdWork className=" ml-12 inline w-12 h-12 m-2"></MdWork>
 						<h1 className="inline align-middle text-3xl font-bold">
 							Experience
 						</h1>

@@ -22,7 +22,7 @@ function Education({ educationList, handleInput, add, del, previewMode }) {
 			<div className="row-start-3 row-end-auto row-auto col-start-1 col-end-11">
 				<div className="">
 					<div>
-						<MdSchool className="inline w-12 h-12 m-2"></MdSchool>
+						<MdSchool className=" ml-12 inline w-12 h-12 m-2"></MdSchool>
 						<h1 className="inline align-middle text-3xl font-bold">
 							Education
 						</h1>
@@ -37,7 +37,7 @@ function Education({ educationList, handleInput, add, del, previewMode }) {
 			<div className="row-start-3 row-end-auto row-auto col-start-1 col-end-11">
 				<div className="">
 					<div>
-						<MdSchool className="inline w-12 h-12 m-2"></MdSchool>
+						<MdSchool className=" ml-12 inline w-12 h-12 m-2"></MdSchool>
 						<h1 className="inline align-middle text-3xl font-bold">
 							Education
 						</h1>

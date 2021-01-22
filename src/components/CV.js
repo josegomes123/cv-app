@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import NameInput from './cv-components/NameInput';
@@ -14,6 +15,7 @@ import Experience from './cv-components/Experience';
 import { MdSend } from 'react-icons/md';
 import Skills from './cv-components/Skills';
 
+
 class CV extends Component {
 	constructor(props) {
 		super(props);
@@ -27,26 +29,9 @@ class CV extends Component {
 			linkedin: '',
 			github: '',
 			// needs default blank object for initial render
-			experience: [
-				{
-					id: 0,
-					company: '',
-					position: '',
-					startDate: '',
-					endDate: '',
-					jobDescription: '',
-				},
-			],
+			experience: [],
 			// needs default blank object for initial render
-			education: [
-				{
-					id: 0,
-					school: '',
-					degree: '',
-					startDate: '',
-					endDate: '',
-				},
-			],
+			education: [],
 			skills: [],
 			previewMode: false,
 			edCount: 0,
@@ -56,6 +41,95 @@ class CV extends Component {
 		this.handleEducationChange = this.handleEducationChange.bind(this);
 		this.handleExperienceChange = this.handleExperienceChange.bind(this);
 	}
+
+	testFullCV = () => {
+		this.setState({
+			name: 'José Afonso Fanha Gomes',
+			bio:
+				"Aspiring Web / Software developer, excited to learn and work with new technologies. Familiar with Java, Javascript, React, Webpack, Git, Bootstrap.\n\nEver since I remember I've been interested in all things technology, including various personal projects where I created and ran online communities, developed skills in Video Editing, content creation, online branding and Programming as a hobby.Previous experience gave me a good framework for working and dealing with people in high-intensity fast-paced environments and attending to the needs of customers, which I hope to ally with my technical abilities and keep improving in every aspect. ",
+			location: 'Lisbon',
+			email: 'zegomes@gmail.com',
+			phone: '911800891',
+			linkedin: 'https://github.com/ze-gomes',
+			github: 'https://github.com/ze-gomes',
+			experience: [
+				{
+					id: 0,
+					position: 'Assistente de Operações em Escala - Airside',
+					company: 'TAP Air Portugal',
+					startDate: '2021-01-05',
+					endDate: '',
+					jobDescription:
+						'Coordernação de todo o processo de boarding dos voos da TAP com as várias equipas envolvidas e garantir a qualidade e eficiência do mesmo. Resolver problemas associados com cancelamentos, atrasos e os demais decorrentes da operação aeroportuária e encontrar soluções para os passageiros afetados.',
+				},
+				{
+					id: 1,
+					position: 'Técnico de Controlo de Qualidade - Cliente',
+					company: 'Portugal Telecom',
+					startDate: '2021-01-12',
+					endDate: '2020-10-13',
+					jobDescription: '',
+				},
+			],
+			education: [
+				{
+					id: 0,
+					school: 'Instituto Superior Técnico',
+					degree: 'Licenciatura em Engenharia Informática e de Computadores',
+					startDate: '2020-11-11',
+					endDate: '2020-10-22',
+				},
+				{
+					id: 1,
+					school: 'ISCTE - Instituto Universitário de Lisboa',
+					degree: 'Programa UPskill - Java Developer',
+					startDate: '2020-09-09',
+					endDate: '2020-09-22',
+				},
+			],
+			skills: [
+				{
+					skillName: 'HTML',
+					id: 0,
+				},
+				{
+					skillName: 'CSS',
+					id: 1,
+				},
+				{
+					skillName: 'Bootstrap',
+					id: 2,
+				},
+				{
+					skillName: 'ReactJS',
+					id: 3,
+				},
+				{
+					skillName: 'TailwindCSS',
+					id: 4,
+				},
+				{
+					skillName: 'English',
+					id: 5,
+				},
+				{
+					skillName: 'Webpack',
+					id: 6,
+				},
+				{
+					skillName: 'Javascript',
+					id: 7,
+				},
+				{
+					skillName: 'Java',
+					id: 8,
+				},
+			],
+			previewMode: true,
+			edCount: 1,
+			expCount: 1,
+		});
+	};
 
 	// renderInfoBox = () => {
 
@@ -163,6 +237,7 @@ class CV extends Component {
 	 * Education Manipulation Features
 	 */
 	handleSubmit = (event) => {
+		this.testFullCV();
 		event.preventDefault();
 		event.stopPropagation();
 		console.log(this.state);
@@ -173,16 +248,18 @@ class CV extends Component {
 
 	generatePDF = () => {
 		var doc = new jsPDF('p', 'mm', 'a4');
-		html2canvas(document.querySelector('#full-cv')).then((canvas) => {
-			const imgData = canvas.toDataURL('image/jpeg');
-			const pdf = new jsPDF('p', 'pt', 'a4');
-			var options = { pagesplit: true };
-			const imgProps = pdf.getImageProperties(imgData);
-			const pdfWidth = pdf.internal.pageSize.getWidth();
-			const pdfHeight = pdf.internal.pageSize.height;
-			pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, 'cv', 'NONE');
-			pdf.save('download.pdf', options);
-		});
+		doc.fromHTML(ReactDOMServer.renderToStaticMarkup(this.render()));
+		doc.save('myDocument.pdf');
+		// html2canvas(document.querySelector('#full-cv')).then((canvas) => {
+		// 	const imgData = canvas.toDataURL('image/jpeg');
+		// 	const pdf = new jsPDF('p', 'pt', 'a4');
+		// 	var options = { pagesplit: true };
+		// 	const imgProps = pdf.getImageProperties(imgData);
+		// 	const pdfWidth = pdf.internal.pageSize.getWidth();
+		// 	const pdfHeight = pdf.internal.pageSize.height;
+		// 	pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, 'cv', 'NONE');
+		// 	pdf.save('download.pdf', options);
+		// });
 	};
 
 	render() {
@@ -208,7 +285,7 @@ class CV extends Component {
 								></SmallBio>
 							</div>
 							{/* // className="col-start-9 col-end-11 row-start-1 row-end-3 justify-self-end" */}
-							<div className="place-self-end">
+							<div className="place-self-end flex-shrink-0">
 								<Location
 									value={this.state.location}
 									handleInput={this.handleInputChange}
@@ -263,6 +340,15 @@ class CV extends Component {
 						>
 							<MdSend className="text-2xl mr-2 inline align-top"></MdSend>Submit
 						</button>
+
+						<button
+							className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
+							onClick={() => this.testFullCV()}
+						>
+							<MdSend className="text-2xl mr-2 inline align-top"></MdSend>TEST
+							CV
+						</button>
+						<button onClick={() => this.generatePDF()}>GEN PDF</button>
 					</div>
 				</form>
 			</div>
