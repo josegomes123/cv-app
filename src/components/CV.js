@@ -237,7 +237,6 @@ class CV extends Component {
 	 * Education Manipulation Features
 	 */
 	handleSubmit = (event) => {
-		this.testFullCV();
 		event.preventDefault();
 		event.stopPropagation();
 		console.log(this.state);
@@ -248,18 +247,25 @@ class CV extends Component {
 
 	generatePDF = () => {
 		var doc = new jsPDF('p', 'mm', 'a4');
-		doc.fromHTML(ReactDOMServer.renderToStaticMarkup(this.render()));
-		doc.save('myDocument.pdf');
-		// html2canvas(document.querySelector('#full-cv')).then((canvas) => {
-		// 	const imgData = canvas.toDataURL('image/jpeg');
-		// 	const pdf = new jsPDF('p', 'pt', 'a4');
-		// 	var options = { pagesplit: true };
-		// 	const imgProps = pdf.getImageProperties(imgData);
-		// 	const pdfWidth = pdf.internal.pageSize.getWidth();
-		// 	const pdfHeight = pdf.internal.pageSize.height;
-		// 	pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, 'cv', 'NONE');
-		// 	pdf.save('download.pdf', options);
-		// });
+		// doc.fromHTML(ReactDOMServer.renderToStaticMarkup(this.render()));
+		// doc.save('myDocument.pdf');
+		html2canvas(document.querySelector('#full-cv')).then((canvas) => {
+			const imgData = canvas.toDataURL('image/jpeg');
+			const pdf = new jsPDF('p', 'pt', 'a4');
+			var options = { pagesplit: true };
+			const imgProps = pdf.getImageProperties(imgData);
+			const pdfWidth = pdf.internal.pageSize.getWidth();
+			const pdfHeight = pdf.internal.pageSize.height;
+			pdf.addImage(imgData, 'JPEG', 15, 15, pdfWidth,pdfHeight, 'cv', 'NONE');
+			pdf.save('download.pdf', options);
+		});
+		// doc.html(ReactDOMServer.renderToStaticMarkup(this.render()), {
+		// 	callback: function (doc) {
+		// 	  doc.save();
+		// 	},
+		// 	x: 10,
+		// 	y: 10
+		//  });
 	};
 
 	render() {

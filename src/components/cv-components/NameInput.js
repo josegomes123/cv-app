@@ -11,7 +11,6 @@ function NameInput({ value, handleInput, previewMode }) {
 					value={value}
 					onChange={handleInput}
 					name="name"
-					required
 				></input>
 			</div>
 		);
