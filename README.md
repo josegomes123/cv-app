@@ -14,7 +14,7 @@ CV App created using Javascript, React and TailwindCSS
 Here is the live demo: https://ze-gomes.github.io/cv-app/
 
 ## Preview
-![preview]()
+![preview](https://i.imgur.com/wUfrEF4.png)
 
 ## License
 This project is licensed under the terms of the **[MIT](https://choosealicense.com/licenses/mit/)**  license. 
