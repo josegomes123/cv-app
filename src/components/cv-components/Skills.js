@@ -63,7 +63,6 @@ class Skills extends Component {
 				);
 			}
 		});
-
 		return (
 			<ul className="flex flex-col max-h-40 flex-wrap  col-start-1 col-span-5 row-start-2 row-span-2 ml-6 text-lg list-disc">
 				{sList}
@@ -82,9 +81,7 @@ class Skills extends Component {
 							<h1 className="inline align-middle text-3xl font-bold">Skills</h1>
 						</div>
 						<hr className="border-0 bg-gray-500 text-gray-500 h-px m-1"></hr>
-						<div className="m-2	">
-							{this.renderSkillList()}
-						</div>
+						<div className="m-2	">{this.renderSkillList()}</div>
 					</div>
 				</div>
 			);
@@ -95,13 +92,6 @@ class Skills extends Component {
 						<div>
 							<FaTools className="ml-12 inline w-12 h-12 m-2"></FaTools>
 							<h1 className="inline align-middle text-3xl font-bold">Skills</h1>
-							<label className="inline-flex items-center mt-3">
-								<input
-									type="checkbox"
-									className="form-checkbox h-5 w-5 rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:outline-none focus:ring focus:border-blue-300"
-								/>
-								<span className="ml-2 font-medium text-black">Show in CV</span>
-							</label>
 						</div>
 						<hr className="border-0 bg-gray-500 text-gray-500 h-px m-1"></hr>
 						<div className="m-2 grid grid-cols-5 grid-rows-3 place-content-start auto-rows-fr">

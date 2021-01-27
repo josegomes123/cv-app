@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
 import NameInput from './cv-components/NameInput';
 import SmallBio from './cv-components/SmallBio';
 import Email from './cv-components/Email';
@@ -14,7 +12,8 @@ import Education from './cv-components/Education';
 import Experience from './cv-components/Experience';
 import { MdSend } from 'react-icons/md';
 import Skills from './cv-components/Skills';
-
+import { PDFViewer } from '@react-pdf/renderer';
+import PDFDocument from './PDFDocument';
 
 class CV extends Component {
 	constructor(props) {
@@ -48,8 +47,8 @@ class CV extends Component {
 			bio:
 				"Aspiring Web / Software developer, excited to learn and work with new technologies. Familiar with Java, Javascript, React, Webpack, Git, Bootstrap.\n\nEver since I remember I've been interested in all things technology, including various personal projects where I created and ran online communities, developed skills in Video Editing, content creation, online branding and Programming as a hobby.Previous experience gave me a good framework for working and dealing with people in high-intensity fast-paced environments and attending to the needs of customers, which I hope to ally with my technical abilities and keep improving in every aspect. ",
 			location: 'Lisbon',
-			email: 'zegomes@gmail.com',
-			phone: '911800891',
+			email: 'mail@gmail.com',
+			phone: '999999999',
 			linkedin: 'https://github.com/ze-gomes',
 			github: 'https://github.com/ze-gomes',
 			experience: [
@@ -241,34 +240,15 @@ class CV extends Component {
 		event.stopPropagation();
 		console.log(this.state);
 		this.setState({ previewMode: true });
-		// Default export is a4 paper, portrait, using millimeters for units
-		// this.generatePDF();
+		this.generatePDF();
 	};
 
 	generatePDF = () => {
-		var doc = new jsPDF('p', 'mm', 'a4');
-		// doc.fromHTML(ReactDOMServer.renderToStaticMarkup(this.render()));
-		// doc.save('myDocument.pdf');
-		html2canvas(document.querySelector('#full-cv')).then((canvas) => {
-			const imgData = canvas.toDataURL('image/jpeg');
-			const pdf = new jsPDF('p', 'pt', 'a4');
-			var options = { pagesplit: true };
-			const imgProps = pdf.getImageProperties(imgData);
-			const pdfWidth = pdf.internal.pageSize.getWidth();
-			const pdfHeight = pdf.internal.pageSize.height;
-			pdf.addImage(imgData, 'JPEG', 15, 15, pdfWidth,pdfHeight, 'cv', 'NONE');
-			pdf.save('download.pdf', options);
-		});
-		// doc.html(ReactDOMServer.renderToStaticMarkup(this.render()), {
-		// 	callback: function (doc) {
-		// 	  doc.save();
-		// 	},
-		// 	x: 10,
-		// 	y: 10
-		//  });
+	
 	};
 
 	render() {
+
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
@@ -344,7 +324,8 @@ class CV extends Component {
 							className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
 							type="submit"
 						>
-							<MdSend className="text-2xl mr-2 inline align-top"></MdSend>Submit
+							<MdSend className="text-2xl mr-2 inline align-top"></MdSend>
+							Submit
 						</button>
 
 						<button
@@ -354,6 +335,11 @@ class CV extends Component {
 							<MdSend className="text-2xl mr-2 inline align-top"></MdSend>TEST
 							CV
 						</button>
+						{this.state.previewMode && (
+							<PDFViewer>
+								<PDFDocument></PDFDocument>
+							</PDFViewer>
+						)}
 						<button onClick={() => this.generatePDF()}>GEN PDF</button>
 					</div>
 				</form>
