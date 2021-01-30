@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOMServer from 'react-dom/server';
 import NameInput from './cv-components/NameInput';
 import SmallBio from './cv-components/SmallBio';
 import Email from './cv-components/Email';
@@ -12,14 +11,17 @@ import Education from './cv-components/Education';
 import Experience from './cv-components/Experience';
 import { MdSend } from 'react-icons/md';
 import Skills from './cv-components/Skills';
-import { PDFViewer } from '@react-pdf/renderer';
 import PDFDocument from './PDFDocument';
+import ReactPDF from '@react-pdf/renderer';
+import ReactDOM from 'react-dom';
+import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer';
 
 class CV extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
+			photo: '',
 			name: '',
 			bio: '',
 			location: '',
@@ -143,6 +145,13 @@ class CV extends Component {
 		});
 	}
 
+
+	handlePhotoUpload = (img) => {
+		this.setState({
+			photo: img,
+		});
+	}
+
 	/**
 	 * Education Manipulation Features
 	 */
@@ -239,16 +248,14 @@ class CV extends Component {
 		event.preventDefault();
 		event.stopPropagation();
 		console.log(this.state);
+		localStorage.setItem('cv', JSON.stringify(this.state));
 		this.setState({ previewMode: true });
 		this.generatePDF();
 	};
 
-	generatePDF = () => {
-	
-	};
+	generatePDF = () => {};
 
 	render() {
-
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
@@ -257,7 +264,7 @@ class CV extends Component {
 						className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-auto m-6"
 					>
 						<div className="flex flex-row flex-shrink-0 col-start-1 col-span-full row-start-1 justify-between">
-							<Photo previewMode={this.state.previewMode}></Photo>
+							<Photo handleInput={this.handlePhotoUpload} previewMode={this.state.previewMode}></Photo>
 							<div className="w-full">
 								<NameInput
 									value={this.state.name}
@@ -336,9 +343,16 @@ class CV extends Component {
 							CV
 						</button>
 						{this.state.previewMode && (
-							<PDFViewer>
-								<PDFDocument></PDFDocument>
-							</PDFViewer>
+							<div>
+								<PDFDownloadLink
+									document={<PDFDocument info={this.state}></PDFDocument>}
+									fileName="somename.pdf"
+								>
+									{({ blob, url, loading, error }) =>
+										loading ? 'Loading document...' : 'Download now!'
+									}
+								</PDFDownloadLink>
+							</div>
 						)}
 						<button onClick={() => this.generatePDF()}>GEN PDF</button>
 					</div>

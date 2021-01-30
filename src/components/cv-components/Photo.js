@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import photoPlaceholder from '../../assets/photo-placeholder.png';
 
-function Photo({ previewMode }) {
+function Photo({ handleInput, previewMode }) {
 	let photo;
-	// const [picture, setPicture] = useState(null);
 	const [imgData, setImgData] = useState(null);
 	const [photoUploaded, setPhotoUploaded] = useState(false);
 
 	// Upload CV photo
 	const onChangePicture = (e) => {
 		if (e.target.files[0]) {
-			// setPicture(e.target.files[0]);
 			const reader = new FileReader();
 			reader.addEventListener('load', () => {
 				setImgData(reader.result);
 				setPhotoUploaded(true);
+				localStorage.setItem("Photo",reader.result);
 			});
 			reader.readAsDataURL(e.target.files[0]);
 		}
 	};
+
+
 
 	// Render photo uploaded or placeholder img
 	if (!photoUploaded) {
