@@ -250,10 +250,9 @@ class CV extends Component {
 		console.log(this.state);
 		localStorage.setItem('cv', JSON.stringify(this.state));
 		this.setState({ previewMode: true });
-		this.generatePDF();
 	};
 
-	generatePDF = () => {};
+	
 
 	render() {
 		return (

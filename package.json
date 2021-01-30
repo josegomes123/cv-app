@@ -5,11 +5,12 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.0.0",
+    "@react-pdf/renderer": "^1.6.13",
+    "@react-pdf/root": "https://github.com/diegomura/react-pdf/archive/@react-pdf/renderer@2.0.0-beta.18.tar.gz",
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
-    "@react-pdf/renderer": "^1.6.13",
     "autoprefixer": "^9.8.6",
     "canvg": "^3.0.7",
     "classnames": "^2.2.6",
