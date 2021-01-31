@@ -15,6 +15,8 @@ import PDFDocument from './PDFDocument';
 import ReactPDF from '@react-pdf/renderer';
 import ReactDOM from 'react-dom';
 import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer';
+import { convertAllSVGs, listConverted } from './SvgToPngConverter';
+import html2canvas from 'html2canvas';
 
 class CV extends Component {
 	constructor(props) {
@@ -41,6 +43,7 @@ class CV extends Component {
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleEducationChange = this.handleEducationChange.bind(this);
 		this.handleExperienceChange = this.handleExperienceChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	testFullCV = () => {
@@ -132,10 +135,6 @@ class CV extends Component {
 		});
 	};
 
-	// renderInfoBox = () => {
-
-	// }
-
 	// General Input Fields Features
 	handleInputChange(event) {
 		let value = event.target.value;
@@ -145,12 +144,11 @@ class CV extends Component {
 		});
 	}
 
-
 	handlePhotoUpload = (img) => {
 		this.setState({
 			photo: img,
 		});
-	}
+	};
 
 	/**
 	 * Education Manipulation Features
@@ -244,15 +242,29 @@ class CV extends Component {
 	/**
 	 * Education Manipulation Features
 	 */
-	handleSubmit = (event) => {
+	async handleSubmit(event) {
+		// await this.convertSVGs();
 		event.preventDefault();
 		event.stopPropagation();
-		console.log(this.state);
 		localStorage.setItem('cv', JSON.stringify(this.state));
 		this.setState({ previewMode: true });
-	};
+	}
 
-	
+	convertSVGs() {
+		let listSVGs = document.querySelectorAll('svg');
+		return new Promise((resolve) => {
+			listSVGs.forEach((svg) => {
+				if (svg.id !== '') {
+					html2canvas(document.querySelectorAll('svg')).then(function (canvas) {
+						var data = canvas.toDataURL('image/png');
+						var src = encodeURI(data);
+						console.log(src);
+					});
+				}
+			});
+			resolve(true);
+		});
+	}
 
 	render() {
 		return (
@@ -263,7 +275,10 @@ class CV extends Component {
 						className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-auto m-6"
 					>
 						<div className="flex flex-row flex-shrink-0 col-start-1 col-span-full row-start-1 justify-between">
-							<Photo handleInput={this.handlePhotoUpload} previewMode={this.state.previewMode}></Photo>
+							<Photo
+								handleInput={this.handlePhotoUpload}
+								previewMode={this.state.previewMode}
+							></Photo>
 							<div className="w-full">
 								<NameInput
 									value={this.state.name}
@@ -346,6 +361,7 @@ class CV extends Component {
 								<PDFDownloadLink
 									document={<PDFDocument info={this.state}></PDFDocument>}
 									fileName="somename.pdf"
+									convertedSVGs={listConverted}
 								>
 									{({ blob, url, loading, error }) =>
 										loading ? 'Loading document...' : 'Download now!'
