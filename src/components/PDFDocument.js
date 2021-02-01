@@ -9,6 +9,11 @@ import {
 	Link,
 } from '@react-pdf/renderer';
 import { AiFillLinkedin } from 'react-icons/ai';
+import locationIMG from '../assets/location.png';
+import emailIMG from '../assets/email.png';
+import githubIMG from '../assets/github.png';
+import linkedinIMG from '../assets/linkedin.png';
+import phoneIMG from '../assets/phone.png';
 
 export class PDFDocument extends Component {
 	constructor(props) {
@@ -70,7 +75,7 @@ export class PDFDocument extends Component {
 				top: 15,
 			},
 			info: {
-				fontSize: 14,
+				fontSize: 9,
 				padding: 4,
 				marginRight: 5,
 				color: '#000000',
@@ -83,13 +88,17 @@ export class PDFDocument extends Component {
 				width: 300,
 			},
 			name: {
-				fontWeight: 500,
-				fontSize: 25,
+				fontWeight: 600,
+				fontSize: 22,
 				paddingBottom: 5,
 			},
 			description: {
-				fontSize: 14,
+				fontSize: 12,
 				maxLines: 6,
+			},
+			icons: {
+				heigth: 12,
+				width: 12,
 			},
 		});
 
@@ -104,7 +113,6 @@ export class PDFDocument extends Component {
 						}}
 					>
 						<Image
-							debug="true"
 							src={photo}
 							allowDangerousPaths="true"
 							style={styles.photo}
@@ -113,22 +121,53 @@ export class PDFDocument extends Component {
 							<Text style={styles.name}>{cv.name}</Text>
 							<Text style={styles.description}>{cv.bio}</Text>
 						</View>
-						<View
-							style={{
-								width: '100%',
-							}}
-						>
-							<Text style={styles.info}>{cv.location}</Text>
-							<Text style={styles.info}>{cv.phone}</Text>
-							<Link src={`mailto:${cv.linkedin}`} style={styles.info}>
-								{cv.email}
-							</Link>
-							<Link src={cv.linkedin} style={styles.info}>
-								{cv.linkedin}
-							</Link>
-							<Link src={cv.linkedin} style={styles.info}>
-								{cv.linkedin}
-							</Link>
+						<View>
+							<View>
+								<Image
+									src={locationIMG}
+									allowDangerousPaths="true"
+									style={styles.icons}
+								></Image>
+								<Text style={styles.info}>{cv.location}</Text>
+							</View>
+							<View>
+								<Image
+									src={phoneIMG}
+									allowDangerousPaths="true"
+									style={styles.icons}
+								></Image>
+								<Text style={styles.info}>{cv.phone}</Text>
+							</View>
+							<View>
+								<Image
+									src={emailIMG}
+									allowDangerousPaths="true"
+									style={styles.icons}
+								></Image>
+								<Link src={`mailto:${cv.email}`} style={styles.info}>
+									{cv.email}
+								</Link>
+							</View>
+							<View>
+								<Image
+									src={linkedinIMG}
+									allowDangerousPaths="true"
+									style={styles.icons}
+								></Image>
+								<Link src={cv.linkedin} style={styles.info}>
+									{cv.linkedin}
+								</Link>
+							</View>
+							<View>
+								<Image
+									src={githubIMG}
+										allowDangerousPaths="true"
+									style={styles.icons}
+								></Image>
+								<Link src={cv.github} style={styles.info}>
+									{cv.github}
+								</Link>
+							</View>
 						</View>
 					</View>
 				</Page>
