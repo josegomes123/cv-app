@@ -61,6 +61,10 @@ export class PDFDocument extends Component {
 				paddingBottom: 65,
 				paddingHorizontal: 20,
 			},
+			infobox: {
+				display: 'flex',
+				flexDirection: 'row',
+			},
 			section: {
 				margin: 10,
 				padding: 10,
@@ -71,8 +75,6 @@ export class PDFDocument extends Component {
 				width: 90,
 				objectFit: 'contain',
 				order: 1,
-				position: 'absolute',
-				top: 15,
 			},
 			info: {
 				fontSize: 9,
@@ -82,10 +84,11 @@ export class PDFDocument extends Component {
 				textDecoration: 'none',
 			},
 			header: {
-				marginLeft: 110,
-				marginRight: 30,
+				marginLeft: 20,
+				marginRight: 20,
 				textAlign: 'justify',
-				width: 300,
+				width: '60%',
+				flexGrow: '4',
 			},
 			name: {
 				fontWeight: 600,
@@ -97,11 +100,11 @@ export class PDFDocument extends Component {
 				maxLines: 6,
 			},
 			icons: {
+				objectFit: 'contain',
 				heigth: 12,
 				width: 12,
 			},
 		});
-
 		return (
 			<Document id="b">
 				<Page size="A4" style={styles.page}>
@@ -109,65 +112,86 @@ export class PDFDocument extends Component {
 						style={{
 							display: 'flex',
 							flexDirection: 'row',
-							justifyContent: 'space-between',
+							height: '120',
+							width: '100%',
+							alignItems: 'center',
+							alignContent: 'space-around',
 						}}
 					>
-						<Image
-							src={photo}
-							allowDangerousPaths="true"
-							style={styles.photo}
-						></Image>
+						{photo !== '' && (
+							<Image
+								src={photo}
+								allowDangerousPaths="true"
+								style={styles.photo}
+							></Image>
+						)}
 						<View style={styles.header}>
 							<Text style={styles.name}>{cv.name}</Text>
 							<Text style={styles.description}>{cv.bio}</Text>
 						</View>
-						<View>
-							<View>
-								<Image
-									src={locationIMG}
-									allowDangerousPaths="true"
-									style={styles.icons}
-								></Image>
-								<Text style={styles.info}>{cv.location}</Text>
-							</View>
-							<View>
-								<Image
-									src={phoneIMG}
-									allowDangerousPaths="true"
-									style={styles.icons}
-								></Image>
-								<Text style={styles.info}>{cv.phone}</Text>
-							</View>
-							<View>
-								<Image
-									src={emailIMG}
-									allowDangerousPaths="true"
-									style={styles.icons}
-								></Image>
-								<Link src={`mailto:${cv.email}`} style={styles.info}>
-									{cv.email}
-								</Link>
-							</View>
-							<View>
-								<Image
-									src={linkedinIMG}
-									allowDangerousPaths="true"
-									style={styles.icons}
-								></Image>
-								<Link src={cv.linkedin} style={styles.info}>
-									{cv.linkedin}
-								</Link>
-							</View>
-							<View>
-								<Image
-									src={githubIMG}
+						<View
+							style={{
+								alignContent: 'center',
+								placeSelf: 'flex-end',
+							}}
+						>
+							{cv.location !== '' && (
+								<View style={styles.infobox}>
+									<Image
+										src={locationIMG}
 										allowDangerousPaths="true"
-									style={styles.icons}
-								></Image>
-								<Link src={cv.github} style={styles.info}>
-									{cv.github}
-								</Link>
-							</View>
+										style={styles.icons}
+									></Image>
+									<Text style={styles.info}>{cv.location}</Text>
+								</View>
+							)}
+							{cv.phone !== '' && (
+								<View style={styles.infobox}>
+									<Image
+										src={phoneIMG}
+										allowDangerousPaths="true"
+										style={styles.icons}
+									></Image>
+									<Text style={styles.info}>{cv.phone}</Text>
+								</View>
+							)}
+							{cv.email !== '' && (
+								<View style={styles.infobox}>
+									<Image
+										src={emailIMG}
+										allowDangerousPaths="true"
+										style={styles.icons}
+									></Image>
+									<Link src={`mailto:${cv.email}`} style={styles.info}>
+										{cv.email}
+									</Link>
+								</View>
+							)}
+							{cv.linkedin !== '' && (
+								<View style={styles.infobox}>
+									<Image
+										src={linkedinIMG}
+										allowDangerousPaths="true"
+										style={styles.icons}
+									></Image>
+									<Link src={cv.linkedin} style={styles.info}>
+										{cv.linkedin}
+									</Link>
+								</View>
+							)}
+							{cv.github !== '' && (
+								<View style={styles.infobox}>
+									<Image
+										src={githubIMG}
+										allowDangerousPaths="true"
+										style={styles.icons}
+										cache="false"
+									></Image>
+									<Link src={cv.github} style={styles.info}>
+										{cv.github}
+									</Link>
+								</View>
+							)}
 						</View>
 					</View>
 				</Page>
