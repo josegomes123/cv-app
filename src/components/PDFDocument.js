@@ -6,7 +6,7 @@ import {
 	View,
 	Document,
 	StyleSheet,
-	Link
+	Link,
 } from '@react-pdf/renderer';
 import { AiFillLinkedin } from 'react-icons/ai';
 
@@ -51,7 +51,7 @@ export class PDFDocument extends Component {
 		const styles = StyleSheet.create({
 			page: {
 				flexDirection: 'row',
-				backgroundColor: '#FFFFFF',
+				backgroundColor: '#E4E4E4',
 				paddingTop: 35,
 				paddingBottom: 65,
 				paddingHorizontal: 20,
@@ -70,19 +70,22 @@ export class PDFDocument extends Component {
 				top: 15,
 			},
 			info: {
-				fontSize: 12,
+				fontSize: 14,
+				padding: 4,
+				marginRight: 5,
 				color: '#000000',
-				textDecoration: 'unset',
+				textDecoration: 'none',
 			},
 			header: {
 				marginLeft: 110,
-				marginRight: 20,
+				marginRight: 30,
 				textAlign: 'justify',
 				width: 300,
 			},
 			name: {
 				fontWeight: 500,
 				fontSize: 25,
+				paddingBottom: 5,
 			},
 			description: {
 				fontSize: 14,
@@ -106,24 +109,27 @@ export class PDFDocument extends Component {
 							allowDangerousPaths="true"
 							style={styles.photo}
 						></Image>
-						<View
-							style={styles.header}
-						>
+						<View style={styles.header}>
 							<Text style={styles.name}>{cv.name}</Text>
 							<Text style={styles.description}>{cv.bio}</Text>
 						</View>
-						<View>
-							<Text style={styles.description}>{cv.location}</Text>
-                          	<Text style={styles.description}>{cv.phone}</Text>
-                          	<Link src={`mailto:${cv.linkedin}`} style={styles.description}>{cv.email}</Link>
-                          <Link  src={cv.linkedin} style={styles.description}>{cv.linkedin}</Link>
-                          	<Link src={cv.linkedin} style={styles.description}>{cv.linkedin}</Link>
-
-
+						<View
+							style={{
+								width: '100%',
+							}}
+						>
+							<Text style={styles.info}>{cv.location}</Text>
+							<Text style={styles.info}>{cv.phone}</Text>
+							<Link src={`mailto:${cv.linkedin}`} style={styles.info}>
+								{cv.email}
+							</Link>
+							<Link src={cv.linkedin} style={styles.info}>
+								{cv.linkedin}
+							</Link>
+							<Link src={cv.linkedin} style={styles.info}>
+								{cv.linkedin}
+							</Link>
 						</View>
-					</View>
-					<View style={styles.section}>
-						<Text>Section #2</Text>
 					</View>
 				</Page>
 			</Document>

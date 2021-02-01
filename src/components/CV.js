@@ -15,7 +15,7 @@ import PDFDocument from './PDFDocument';
 import ReactPDF from '@react-pdf/renderer';
 import ReactDOM from 'react-dom';
 import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer';
-import { convertAllSVGs, listConverted } from './SvgToPngConverter';
+// import { convertAllSVGs, listConverted } from './SvgToPngConverter';
 import html2canvas from 'html2canvas';
 
 class CV extends Component {
@@ -361,7 +361,7 @@ class CV extends Component {
 								<PDFDownloadLink
 									document={<PDFDocument info={this.state}></PDFDocument>}
 									fileName="somename.pdf"
-									convertedSVGs={listConverted}
+							
 								>
 									{({ blob, url, loading, error }) =>
 										loading ? 'Loading document...' : 'Download now!'
