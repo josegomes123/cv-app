@@ -8,6 +8,7 @@ import React, {useEffect } from 'react';
 import { Font } from '@react-pdf/renderer';
 import font from './assets/font.ttf';
 import fontBold from './assets/fontBold.ttf';
+import Sidebar from './components/Sidebar';
 
 function App() {
 	const registerFont = () => {
@@ -33,7 +34,7 @@ function App() {
 	return (
 		<div>
 			<Header></Header>
-			<CV></CV>
+			<div className="flex flex-column"><CV className="flex-grow"></CV><Sidebar></Sidebar></div>
 			<Footer></Footer>
 		</div>
 	);

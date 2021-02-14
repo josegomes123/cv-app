@@ -257,7 +257,7 @@ class CV extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="flex-grow">
 				<form onSubmit={this.handleSubmit}>
 					<div
 						id="full-cv"
