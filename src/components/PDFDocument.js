@@ -62,14 +62,14 @@ function PDFDocument({ cv }) {
 	const generateSkillsBlockPDF = () => {
 		return cv.skills.map((skillBlock, index) => (
 			<Text key={index} style={styles.blockTextSkills}>
-				{'\u2022' + ' '} {skillBlock.skillName}
+				{'\u2022'} {skillBlock.skillName}
 			</Text>
 		));
 	};
 
 	const renderPhoto = () => {
 		const photo = localStorage.getItem('Photo');
-		if (photo != '' && photo != null) {
+		if (photo !== '' && photo !== null) {
 			return (
 				<Image
 					src={photo}

@@ -12,8 +12,7 @@ import Experience from './cv-components/Experience';
 import { MdSend, MdFileDownload } from 'react-icons/md';
 import Skills from './cv-components/Skills';
 import generatePDFDocument from './GeneratePDF';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import PDFDocument from './PDFDocument';
+import { PreviewModeContext } from './PreviewModeContext';
 
 class CV extends Component {
 	constructor(props) {
@@ -44,9 +43,15 @@ class CV extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	static previewDisplayContext = PreviewModeContext;
+
 	componentDidMount() {
 		localStorage.clear();
 		window.setTimeout(this.setStartLoading.bind(this), 2000);
+
+		// <previewDisplayContext.Consumer>
+		// 	console.log(value);
+		// </previewDisplayContext.Consumer>;
 	}
 
 	setStartLoading() {

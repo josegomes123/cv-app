@@ -21,7 +21,7 @@ export default function Header() {
 				/>
 			</svg>
 			<h1 className="font-sans c-h1 font-semibold subpixel-antialiased transition-all duration-300 flex-1 text-gray-100 text-lg sm:text-2xl lg:text-3xl">Make Your CV!</h1>
-			<h3 className="transition-all justify-self-end text-shadow-lg caps-titling duration-300 pr-4 text-gray-100 text-xs sm:text-lg lg:text-xl">Export automatically to PDF!</h3>
+			<h3 className="transition-all justify-self-end mr-5 caps-titling duration-300 pr-4 text-gray-100 text-lg sm:text-lg lg:text-xl">Export automatically to PDF!</h3>
 		</div>
 	);
 }
