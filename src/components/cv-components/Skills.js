@@ -72,17 +72,22 @@ class Skills extends Component {
 
 	render() {
 		const previewMode = this.props.previewMode;
+		const skillList = this.props.skillList;
 		if (previewMode) {
 			return (
 				<div className="mt-4 row-start-12 row-end-auto row-auto col-start-1 col-end-11">
-					<div className="">
+					{skillList.length !== 0 && (
 						<div>
-							<FaTools className=" ml-12 inline w-12 h-12 m-2"></FaTools>
-							<h1 className="inline align-middle text-3xl font-bold">Skills</h1>
+							<div>
+								<FaTools className=" ml-12 inline w-12 h-12 m-2"></FaTools>
+								<h1 className="inline align-middle text-3xl font-bold">
+									Skills
+								</h1>
+							</div>
+							<hr className="border-0 bg-gray-500 text-gray-500 h-px m-1"></hr>
+							<div className="m-2	">{this.renderSkillList()}</div>
 						</div>
-						<hr className="border-0 bg-gray-500 text-gray-500 h-px m-1"></hr>
-						<div className="m-2	">{this.renderSkillList()}</div>
-					</div>
+					)}
 				</div>
 			);
 		} else {

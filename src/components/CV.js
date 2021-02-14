@@ -9,14 +9,11 @@ import Phone from './cv-components/Phone';
 import Photo from './cv-components/Photo';
 import Education from './cv-components/Education';
 import Experience from './cv-components/Experience';
-import { MdSend } from 'react-icons/md';
+import { MdSend, MdFileDownload } from 'react-icons/md';
 import Skills from './cv-components/Skills';
+import generatePDFDocument from './GeneratePDF';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import PDFDocument from './PDFDocument';
-import ReactPDF from '@react-pdf/renderer';
-import ReactDOM from 'react-dom';
-import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer';
-// import { convertAllSVGs, listConverted } from './SvgToPngConverter';
-import html2canvas from 'html2canvas';
 
 class CV extends Component {
 	constructor(props) {
@@ -39,11 +36,21 @@ class CV extends Component {
 			previewMode: false,
 			edCount: 0,
 			expCount: 0,
+			load: false,
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleEducationChange = this.handleEducationChange.bind(this);
 		this.handleExperienceChange = this.handleExperienceChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	componentDidMount() {
+		localStorage.clear();
+		window.setTimeout(this.setStartLoading.bind(this), 2000);
+	}
+
+	setStartLoading() {
+		this.setState({ load: true });
 	}
 
 	testFullCV = () => {
@@ -130,6 +137,7 @@ class CV extends Component {
 				},
 			],
 			previewMode: true,
+			submitStatus: false,
 			edCount: 1,
 			expCount: 1,
 		});
@@ -239,31 +247,12 @@ class CV extends Component {
 		console.log(this.state.skills);
 	};
 
-	/**
-	 * Education Manipulation Features
-	 */
-	async handleSubmit(event) {
-		// await this.convertSVGs();
+	handleSubmit(event) {
 		event.preventDefault();
 		event.stopPropagation();
-		localStorage.setItem('cv', JSON.stringify(this.state));
 		this.setState({ previewMode: true });
-	}
-
-	convertSVGs() {
-		let listSVGs = document.querySelectorAll('svg');
-		return new Promise((resolve) => {
-			listSVGs.forEach((svg) => {
-				if (svg.id !== '') {
-					html2canvas(document.querySelectorAll('svg')).then(function (canvas) {
-						var data = canvas.toDataURL('image/png');
-						var src = encodeURI(data);
-						console.log(src);
-					});
-				}
-			});
-			resolve(true);
-		});
+		this.setState({ submitStatus: true });
+		localStorage.setItem('cv', JSON.stringify(this.state));
 	}
 
 	render() {
@@ -272,7 +261,7 @@ class CV extends Component {
 				<form onSubmit={this.handleSubmit}>
 					<div
 						id="full-cv"
-						className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-auto m-6"
+						className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-min m-6"
 					>
 						<div className="flex flex-row flex-shrink-0 col-start-1 col-span-full row-start-1 justify-between">
 							<Photo
@@ -341,13 +330,24 @@ class CV extends Component {
 							previewMode={this.state.previewMode}
 						></Skills>
 
-						<button
-							className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
-							type="submit"
-						>
-							<MdSend className="text-2xl mr-2 inline align-top"></MdSend>
-							Submit
-						</button>
+						{!this.state.submitStatus && (
+							<button
+								className="col-start-1  -my-24 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
+								type="submit"
+							>
+								<MdSend className="text-2xl mr-2 inline align-top"></MdSend>
+								Submit
+							</button>
+						)}
+						{this.state.previewMode && this.state.submitStatus && (
+							<button
+								onClick={() => generatePDFDocument(this.state)}
+								className="-my-24 col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
+							>
+								<MdFileDownload className="text-2xl mr-2 inline align-top"></MdFileDownload>
+								Download
+							</button>
+						)}
 
 						<button
 							className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
@@ -356,20 +356,6 @@ class CV extends Component {
 							<MdSend className="text-2xl mr-2 inline align-top"></MdSend>TEST
 							CV
 						</button>
-						{this.state.previewMode && (
-							<div>
-								<PDFDownloadLink
-									document={<PDFDocument info={this.state}></PDFDocument>}
-									fileName="somename.pdf"
-							
-								>
-									{({ blob, url, loading, error }) =>
-										loading ? 'Loading document...' : 'Download now!'
-									}
-								</PDFDownloadLink>
-							</div>
-						)}
-						<button onClick={() => this.generatePDF()}>GEN PDF</button>
 					</div>
 				</form>
 			</div>
