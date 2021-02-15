@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import '../App.css';
-import { PreviewModeContext } from './PreviewModeContext';
+import { PreviewModeContext } from './helpers/PreviewModeContext';
 
 function PreviewToggle() {
 	const {previewMode, setPreviewMode} = useContext(PreviewModeContext);

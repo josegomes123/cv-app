@@ -9,8 +9,8 @@ import font from './assets/fonts/SourceSansPro-Regular.otf';
 import fontSemiBold from './assets/fonts/SourceSansPro-Semibold.otf';
 import fontBold from './assets/fonts/SourceSansPro-Bold.otf';
 import fontBlack from './assets/fonts/SourceSansPro-Black.otf';
-import Sidebar from './components/Sidebar';
-import {PreviewModeContext} from './components/PreviewModeContext';
+import Sidebar from './components/sidebar/Sidebar';
+import {PreviewModeContext} from './components/helpers/PreviewModeContext';
 
 function App() {
 	const [previewMode, setPreviewMode] = useState(false);

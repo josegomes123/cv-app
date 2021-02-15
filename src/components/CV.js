@@ -11,9 +11,9 @@ import Education from './cv-components/Education';
 import Experience from './cv-components/Experience';
 import { MdSend, MdFileDownload } from 'react-icons/md';
 import Skills from './cv-components/Skills';
-import generatePDFDocument from './GeneratePDF';
-import { PreviewModeContext } from './PreviewModeContext';
-import cvTemplateTest from "./cvTemplateTest";
+import generatePDFDocument from './helpers/GeneratePDF';
+import { PreviewModeContext } from './helpers/PreviewModeContext';
+import cvTemplateTest from './helpers/cvTemplateTest';
 
 class CV extends Component {
 	constructor(props) {
@@ -48,14 +48,13 @@ class CV extends Component {
 	static contextType = PreviewModeContext;
 
 	componentDidMount() {
+		localStorage.clear(); // to clear cached photo
 		window.setTimeout(this.setStartLoading.bind(this), 2000);
 	}
 
 	setStartLoading() {
 		this.setState({ load: true });
 	}
-
-
 
 	// General Input Fields Features
 	handleInputChange(event) {
@@ -170,7 +169,7 @@ class CV extends Component {
 	}
 
 	render() {
-		const {previewMode} = this.context;
+		const { previewMode } = this.context;
 		return (
 			<div className="flex-grow">
 				<form onSubmit={this.handleSubmit}>
