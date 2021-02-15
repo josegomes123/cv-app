@@ -3,13 +3,12 @@ import CV from './components/CV';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import React, { useEffect, useState, useContext } from 'react';
-
-import { Font } from '@react-pdf/renderer';
-import fontLight from './assets/fonts/SourceSansPro-Light.ttf';
-import font from './assets/fonts/SourceSansPro-Regular.ttf';
-import fontSemiBold from './assets/fonts/SourceSansPro-SemiBold.ttf';
-import fontBold from './assets/fonts/SourceSansPro-Bold.ttf';
-import fontBlack from './assets/fonts/SourceSansPro-Black.ttf';
+import { StyleSheet, Font } from '@react-pdf/renderer'
+import fontLight from './assets/fonts/SourceSansPro-Light.otf';
+import font from './assets/fonts/SourceSansPro-Regular.otf';
+import fontSemiBold from './assets/fonts/SourceSansPro-Semibold.otf';
+import fontBold from './assets/fonts/SourceSansPro-Bold.otf';
+import fontBlack from './assets/fonts/SourceSansPro-Black.otf';
 import Sidebar from './components/Sidebar';
 import {PreviewModeContext} from './components/PreviewModeContext';
 
@@ -21,7 +20,7 @@ function App() {
 		// Register font
 		Font.register({
 			family: 'SourceSansPro',
-			format: 'truetype',
+			format: 'opentype',
 			fonts: [
 				{
 					src: fontLight,
@@ -54,7 +53,7 @@ function App() {
 			<Header></Header>
 			<PreviewModeContext.Provider value={value}>
 				<div className="flex flex-column">
-					<CV className="flex-grow"></CV>
+					<CV></CV>
 					<Sidebar></Sidebar>
 				</div>
 			</PreviewModeContext.Provider>

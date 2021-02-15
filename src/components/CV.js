@@ -36,6 +36,7 @@ class CV extends Component {
 			edCount: 0,
 			expCount: 0,
 			load: false,
+			submitStatus: false,
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleEducationChange = this.handleEducationChange.bind(this);
@@ -43,15 +44,14 @@ class CV extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	static previewDisplayContext = PreviewModeContext;
+	static contextType = PreviewModeContext;
 
 	componentDidMount() {
-		localStorage.clear();
 		window.setTimeout(this.setStartLoading.bind(this), 2000);
-
-		// <previewDisplayContext.Consumer>
-		// 	console.log(value);
-		// </previewDisplayContext.Consumer>;
+		console.log(PreviewModeContext)
+		// <PreviewModeContext.Consumer>
+		// </PreviewModeContext.Consumer>
+	
 	}
 
 	setStartLoading() {

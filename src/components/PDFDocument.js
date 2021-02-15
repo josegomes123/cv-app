@@ -10,7 +10,7 @@ import {
 } from '@react-pdf/renderer';
 import locationIMG from '../assets/location.png';
 import emailIMG from '../assets/email.png';
-import githubIMG1 from '../assets/github.png';
+import githubIMG1 from '../assets/github.jpg';
 import linkedinIMG from '../assets/linkedin.png';
 import phoneIMG from '../assets/phone.png';
 import schoolIMG from '../assets/school.png';
@@ -87,7 +87,7 @@ function PDFDocument({ cv }) {
 		page: {
 			display: 'flex',
 			flexDirection: 'column',
-			backgroundColor: '#E4E4E4',
+			backgroundColor: '#ffffff',
 			paddingTop: 35,
 			paddingBottom: 65,
 			paddingHorizontal: 20,
@@ -175,7 +175,12 @@ function PDFDocument({ cv }) {
 		},
 	});
 	return (
-		<Document id="b">
+		<Document
+			id="b"
+			style={{
+				fontFamily: 'SourceSansPro',
+			}}
+		>
 			<Page size="A4" style={styles.page}>
 				<View
 					style={{
@@ -336,7 +341,7 @@ function PDFDocument({ cv }) {
 								flexDirection: 'column',
 								maxHeight: '150px',
 								flexWrap: 'wrap',
-								alignContent: 'space-around',
+								alignContent: 'flex-start',
 							}}
 						>
 							{generateSkillsBlockPDF()}
