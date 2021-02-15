@@ -2,15 +2,14 @@ import './App.css';
 import CV from './components/CV';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import React, { useEffect, useState} from 'react';
-import {Font } from '@react-pdf/renderer'
+import React, { useEffect, useState } from 'react';
+import { Font } from '@react-pdf/renderer';
 import fontLight from './assets/fonts/SourceSansPro-Light.otf';
 import font from './assets/fonts/SourceSansPro-Regular.otf';
 import fontSemiBold from './assets/fonts/SourceSansPro-Semibold.otf';
 import fontBold from './assets/fonts/SourceSansPro-Bold.otf';
 import fontBlack from './assets/fonts/SourceSansPro-Black.otf';
-import Sidebar from './components/sidebar/Sidebar';
-import {PreviewModeContext} from './components/helpers/PreviewModeContext';
+import { PreviewModeContext } from './components/helpers/PreviewModeContext';
 
 function App() {
 	const [previewMode, setPreviewMode] = useState(false);
@@ -52,10 +51,7 @@ function App() {
 		<div>
 			<Header></Header>
 			<PreviewModeContext.Provider value={value}>
-				<div className="flex flex-column">
-					<CV></CV>
-					<Sidebar></Sidebar>
-				</div>
+				<CV></CV>
 			</PreviewModeContext.Provider>
 			<Footer></Footer>
 		</div>

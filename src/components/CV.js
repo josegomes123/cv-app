@@ -14,6 +14,7 @@ import Skills from './cv-components/Skills';
 import generatePDFDocument from './helpers/GeneratePDF';
 import { PreviewModeContext } from './helpers/PreviewModeContext';
 import cvTemplateTest from './helpers/cvTemplateTest';
+import Sidebar from './sidebar/Sidebar';
 
 class CV extends Component {
 	constructor(props) {
@@ -43,9 +44,14 @@ class CV extends Component {
 		this.handleEducationChange = this.handleEducationChange.bind(this);
 		this.handleExperienceChange = this.handleExperienceChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.loadTemplateCV = this.loadTemplateCV.bind(this)
 	}
 
 	static contextType = PreviewModeContext;
+
+	loadTemplateCV(cvData){
+		this.setState(cvData);
+	}
 
 	componentDidMount() {
 		localStorage.clear(); // to clear cached photo
@@ -171,107 +177,110 @@ class CV extends Component {
 	render() {
 		const { previewMode } = this.context;
 		return (
-			<div className="flex-grow">
-				<form onSubmit={this.handleSubmit}>
-					<div
-						id="full-cv"
-						className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-min m-6"
-					>
-						<div className="flex flex-row flex-shrink-0 col-start-1 col-span-full row-start-1 justify-between">
-							<Photo
-								handleInput={this.handlePhotoUpload}
-								previewMode={previewMode}
-							></Photo>
-							<div className="w-full">
-								<NameInput
-									value={this.state.name}
-									handleInput={this.handleInputChange}
-									previewMode={previewMode}
-								></NameInput>
-								<SmallBio
-									value={this.state.bio}
-									handleInput={this.handleInputChange}
-									previewMode={previewMode}
-								></SmallBio>
-							</div>
-							{/* // className="col-start-9 col-end-11 row-start-1 row-end-3 justify-self-end" */}
-							<div className="place-self-end flex-shrink-0">
-								<Location
-									value={this.state.location}
-									handleInput={this.handleInputChange}
-									previewMode={previewMode}
-								></Location>
-								<Phone
-									value={this.state.phone}
-									handleInput={this.handleInputChange}
-									previewMode={previewMode}
-								></Phone>
-								<Email
-									value={this.state.email}
-									handleInput={this.handleInputChange}
-									previewMode={previewMode}
-								></Email>
-								<LinkedIn
-									value={this.state.linkedin}
-									handleInput={this.handleInputChange}
-									previewMode={previewMode}
-								></LinkedIn>
-								<Github
-									value={this.state.github}
-									handleInput={this.handleInputChange}
-									previewMode={previewMode}
-								></Github>
-							</div>
-						</div>
-						<Education
-							educationList={this.state.education}
-							handleInput={this.handleEducationChange}
-							add={this.handleEducationAdd}
-							del={this.handleEducationDelete}
-							previewMode={previewMode}
-						></Education>
-						<Experience
-							experienceList={this.state.experience}
-							handleInput={this.handleExperienceChange}
-							add={this.handleExperienceAdd}
-							del={this.handleExperienceDelete}
-							previewMode={previewMode}
-						></Experience>
-						<Skills
-							skillList={this.state.skills}
-							add={this.handleSkillAdd}
-							del={this.handleSkillDelete}
-							previewMode={previewMode}
-						></Skills>
-
-						{!this.state.submitStatus && (
-							<button
-								className="col-start-1  -my-24 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
-								type="submit"
-							>
-								<MdSend className="text-2xl mr-2 inline align-top"></MdSend>
-								Submit
-							</button>
-						)}
-						{previewMode && this.state.submitStatus && (
-							<button
-								onClick={() => generatePDFDocument(this.state)}
-								className="-my-24 col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
-							>
-								<MdFileDownload className="text-2xl mr-2 inline align-top"></MdFileDownload>
-								Download
-							</button>
-						)}
-
-						<button
-							className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
-							onClick={() => this.setState(cvTemplateTest())}
+			<div className="flex flex-column">
+				<div className="flex-grow">
+					<form onSubmit={this.handleSubmit}>
+						<div
+							id="full-cv"
+							className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-min m-6"
 						>
-							<MdSend className="text-2xl mr-2 inline align-top"></MdSend>TEST
-							CV
-						</button>
-					</div>
-				</form>
+							<div className="flex flex-row flex-shrink-0 col-start-1 col-span-full row-start-1 justify-between">
+								<Photo
+									handleInput={this.handlePhotoUpload}
+									previewMode={previewMode}
+								></Photo>
+								<div className="w-full">
+									<NameInput
+										value={this.state.name}
+										handleInput={this.handleInputChange}
+										previewMode={previewMode}
+									></NameInput>
+									<SmallBio
+										value={this.state.bio}
+										handleInput={this.handleInputChange}
+										previewMode={previewMode}
+									></SmallBio>
+								</div>
+								{/* // className="col-start-9 col-end-11 row-start-1 row-end-3 justify-self-end" */}
+								<div className="place-self-end flex-shrink-0">
+									<Location
+										value={this.state.location}
+										handleInput={this.handleInputChange}
+										previewMode={previewMode}
+									></Location>
+									<Phone
+										value={this.state.phone}
+										handleInput={this.handleInputChange}
+										previewMode={previewMode}
+									></Phone>
+									<Email
+										value={this.state.email}
+										handleInput={this.handleInputChange}
+										previewMode={previewMode}
+									></Email>
+									<LinkedIn
+										value={this.state.linkedin}
+										handleInput={this.handleInputChange}
+										previewMode={previewMode}
+									></LinkedIn>
+									<Github
+										value={this.state.github}
+										handleInput={this.handleInputChange}
+										previewMode={previewMode}
+									></Github>
+								</div>
+							</div>
+							<Education
+								educationList={this.state.education}
+								handleInput={this.handleEducationChange}
+								add={this.handleEducationAdd}
+								del={this.handleEducationDelete}
+								previewMode={previewMode}
+							></Education>
+							<Experience
+								experienceList={this.state.experience}
+								handleInput={this.handleExperienceChange}
+								add={this.handleExperienceAdd}
+								del={this.handleExperienceDelete}
+								previewMode={previewMode}
+							></Experience>
+							<Skills
+								skillList={this.state.skills}
+								add={this.handleSkillAdd}
+								del={this.handleSkillDelete}
+								previewMode={previewMode}
+							></Skills>
+
+							{!this.state.submitStatus && (
+								<button
+									className="col-start-1  -my-24 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
+									type="submit"
+								>
+									<MdSend className="text-2xl mr-2 inline align-top"></MdSend>
+									Submit
+								</button>
+							)}
+							{previewMode && this.state.submitStatus && (
+								<button
+									onClick={() => generatePDFDocument(this.state)}
+									className="-my-24 col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
+								>
+									<MdFileDownload className="text-2xl mr-2 inline align-top"></MdFileDownload>
+									Download
+								</button>
+							)}
+
+							<button
+								className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
+								onClick={() => this.setState(cvTemplateTest())}
+							>
+								<MdSend className="text-2xl mr-2 inline align-top"></MdSend>TEST
+								CV
+							</button>
+						</div>
+					</form>
+				</div>
+				<Sidebar handler={this.loadTemplateCV}></Sidebar>
 			</div>
 		);
 	}

@@ -3,7 +3,4 @@ const cleanURL = (url) => {
 	return url.replace(regex, '');
 };
 
-
-
-
 export { cleanURL };

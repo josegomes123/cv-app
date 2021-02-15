@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiFillLinkedin } from 'react-icons/ai';
-import {cleanURL} from "./PreviewGenerator"
+import {cleanURL} from "../helpers/PreviewGenerator"
 
 
 function LinkedIn({ value, handleInput, previewMode }) {

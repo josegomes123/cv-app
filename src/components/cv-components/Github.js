@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoMarkGithub } from 'react-icons/go';
-import { cleanURL } from './PreviewGenerator';
+import { cleanURL } from '../helpers/PreviewGenerator';
 
 function Github({ value, handleInput, previewMode }) {
 	if (!previewMode) {
