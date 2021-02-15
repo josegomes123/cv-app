@@ -54,7 +54,7 @@ class ExperienceBlock extends Component {
 				<div className="pl-4 pt-2 grid auto-rows-auto grid-cols-1">
 					<div className="row-start-1">
 						<p className="text-2xl inline mr-10">{company}</p>
-						<p className="inline font-medium text-2xl">{position}</p>
+						<p className="inline font-semibold text-2xl">{position}</p>
 					</div>
 					<div className="w-full col-span-full pt-1 pb-1 align-text-bottom ">
 						<p className="">
@@ -94,7 +94,6 @@ class ExperienceBlock extends Component {
 						<input
 							className="pl-2 rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:outline-none focus:ring focus:border-blue-300"
 							type="date"
-							id="start"
 							name="startDate"
 							value={startDate}
 							onChange={this.handleInput}
@@ -109,7 +108,6 @@ class ExperienceBlock extends Component {
 						<input
 							className="ml-2 pl-2 rounded border border-gray-200 block placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:outline-none focus:ring focus:border-blue-300"
 							type="date"
-							id="end"
 							name="endDate"
 							value={endDate}
 							onChange={this.handleInput}

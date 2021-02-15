@@ -47,7 +47,7 @@ class EducationBlock extends Component {
 				<div className="pl-4 pt-2 grid grid-rows-2 grid-cols-1">
 					<div className="row-start-1">
 						<p className="text-2xl inline mr-10">{school}</p>
-						<p className="inline font-medium text-2xl">{degree}</p>
+						<p className="inline font-semibold text-2xl">{degree}</p>
 					</div>
 					<div className="w-full col-span-full">
 						<p className="">
@@ -85,7 +85,6 @@ class EducationBlock extends Component {
 						<input
 							className="pl-2 rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500  focus:outline-none focus:ring focus:border-blue-300"
 							type="date"
-							id="start"
 							name="startDate"
 							value={startDate}
 							onChange={this.handleInput}
@@ -100,7 +99,6 @@ class EducationBlock extends Component {
 						<input
 							className="ml-2 pl-2 rounded border border-gray-200 block  placeholder-black focus:placeholder-gray-400 hover:border-blue-500 focus:outline-none focus:ring focus:border-blue-300"
 							type="date"
-							id="end"
 							name="endDate"
 							value={endDate}
 							onChange={this.handleInput}

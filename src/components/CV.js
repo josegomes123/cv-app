@@ -13,6 +13,7 @@ import { MdSend, MdFileDownload } from 'react-icons/md';
 import Skills from './cv-components/Skills';
 import generatePDFDocument from './GeneratePDF';
 import { PreviewModeContext } from './PreviewModeContext';
+import cvTemplateTest from "./cvTemplateTest";
 
 class CV extends Component {
 	constructor(props) {
@@ -48,105 +49,13 @@ class CV extends Component {
 
 	componentDidMount() {
 		window.setTimeout(this.setStartLoading.bind(this), 2000);
-		console.log(PreviewModeContext)
-		// <PreviewModeContext.Consumer>
-		// </PreviewModeContext.Consumer>
-	
 	}
 
 	setStartLoading() {
 		this.setState({ load: true });
 	}
 
-	testFullCV = () => {
-		this.setState({
-			name: 'José Afonso Fanha Gomes',
-			bio:
-				"Aspiring Web / Software developer, excited to learn and work with new technologies. Familiar with Java, Javascript, React, Webpack, Git, Bootstrap.\n\nEver since I remember I've been interested in all things technology, including various personal projects where I created and ran online communities, developed skills in Video Editing, content creation, online branding and Programming as a hobby.Previous experience gave me a good framework for working and dealing with people in high-intensity fast-paced environments and attending to the needs of customers, which I hope to ally with my technical abilities and keep improving in every aspect. ",
-			location: 'Lisbon',
-			email: 'mail@gmail.com',
-			phone: '999999999',
-			linkedin: 'https://github.com/ze-gomes',
-			github: 'https://github.com/ze-gomes',
-			experience: [
-				{
-					id: 0,
-					position: 'Assistente de Operações em Escala - Airside',
-					company: 'TAP Air Portugal',
-					startDate: '2021-01-05',
-					endDate: '',
-					jobDescription:
-						'Coordernação de todo o processo de boarding dos voos da TAP com as várias equipas envolvidas e garantir a qualidade e eficiência do mesmo. Resolver problemas associados com cancelamentos, atrasos e os demais decorrentes da operação aeroportuária e encontrar soluções para os passageiros afetados.',
-				},
-				{
-					id: 1,
-					position: 'Técnico de Controlo de Qualidade - Cliente',
-					company: 'Portugal Telecom',
-					startDate: '2021-01-12',
-					endDate: '2020-10-13',
-					jobDescription: '',
-				},
-			],
-			education: [
-				{
-					id: 0,
-					school: 'Instituto Superior Técnico',
-					degree: 'Licenciatura em Engenharia Informática e de Computadores',
-					startDate: '2020-11-11',
-					endDate: '2020-10-22',
-				},
-				{
-					id: 1,
-					school: 'ISCTE - Instituto Universitário de Lisboa',
-					degree: 'Programa UPskill - Java Developer',
-					startDate: '2020-09-09',
-					endDate: '2020-09-22',
-				},
-			],
-			skills: [
-				{
-					skillName: 'HTML',
-					id: 0,
-				},
-				{
-					skillName: 'CSS',
-					id: 1,
-				},
-				{
-					skillName: 'Bootstrap',
-					id: 2,
-				},
-				{
-					skillName: 'ReactJS',
-					id: 3,
-				},
-				{
-					skillName: 'TailwindCSS',
-					id: 4,
-				},
-				{
-					skillName: 'English',
-					id: 5,
-				},
-				{
-					skillName: 'Webpack',
-					id: 6,
-				},
-				{
-					skillName: 'Javascript',
-					id: 7,
-				},
-				{
-					skillName: 'Java',
-					id: 8,
-				},
-			],
-			previewMode: true,
-			submitStatus: false,
-			edCount: 1,
-			expCount: 1,
-		});
-	};
+
 
 	// General Input Fields Features
 	handleInputChange(event) {
@@ -261,6 +170,7 @@ class CV extends Component {
 	}
 
 	render() {
+		const {previewMode} = this.context;
 		return (
 			<div className="flex-grow">
 				<form onSubmit={this.handleSubmit}>
@@ -271,18 +181,18 @@ class CV extends Component {
 						<div className="flex flex-row flex-shrink-0 col-start-1 col-span-full row-start-1 justify-between">
 							<Photo
 								handleInput={this.handlePhotoUpload}
-								previewMode={this.state.previewMode}
+								previewMode={previewMode}
 							></Photo>
 							<div className="w-full">
 								<NameInput
 									value={this.state.name}
 									handleInput={this.handleInputChange}
-									previewMode={this.state.previewMode}
+									previewMode={previewMode}
 								></NameInput>
 								<SmallBio
 									value={this.state.bio}
 									handleInput={this.handleInputChange}
-									previewMode={this.state.previewMode}
+									previewMode={previewMode}
 								></SmallBio>
 							</div>
 							{/* // className="col-start-9 col-end-11 row-start-1 row-end-3 justify-self-end" */}
@@ -290,27 +200,27 @@ class CV extends Component {
 								<Location
 									value={this.state.location}
 									handleInput={this.handleInputChange}
-									previewMode={this.state.previewMode}
+									previewMode={previewMode}
 								></Location>
 								<Phone
 									value={this.state.phone}
 									handleInput={this.handleInputChange}
-									previewMode={this.state.previewMode}
+									previewMode={previewMode}
 								></Phone>
 								<Email
 									value={this.state.email}
 									handleInput={this.handleInputChange}
-									previewMode={this.state.previewMode}
+									previewMode={previewMode}
 								></Email>
 								<LinkedIn
 									value={this.state.linkedin}
 									handleInput={this.handleInputChange}
-									previewMode={this.state.previewMode}
+									previewMode={previewMode}
 								></LinkedIn>
 								<Github
 									value={this.state.github}
 									handleInput={this.handleInputChange}
-									previewMode={this.state.previewMode}
+									previewMode={previewMode}
 								></Github>
 							</div>
 						</div>
@@ -319,20 +229,20 @@ class CV extends Component {
 							handleInput={this.handleEducationChange}
 							add={this.handleEducationAdd}
 							del={this.handleEducationDelete}
-							previewMode={this.state.previewMode}
+							previewMode={previewMode}
 						></Education>
 						<Experience
 							experienceList={this.state.experience}
 							handleInput={this.handleExperienceChange}
 							add={this.handleExperienceAdd}
 							del={this.handleExperienceDelete}
-							previewMode={this.state.previewMode}
+							previewMode={previewMode}
 						></Experience>
 						<Skills
 							skillList={this.state.skills}
 							add={this.handleSkillAdd}
 							del={this.handleSkillDelete}
-							previewMode={this.state.previewMode}
+							previewMode={previewMode}
 						></Skills>
 
 						{!this.state.submitStatus && (
@@ -344,7 +254,7 @@ class CV extends Component {
 								Submit
 							</button>
 						)}
-						{this.state.previewMode && this.state.submitStatus && (
+						{previewMode && this.state.submitStatus && (
 							<button
 								onClick={() => generatePDFDocument(this.state)}
 								className="-my-24 col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
@@ -356,7 +266,7 @@ class CV extends Component {
 
 						<button
 							className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
-							onClick={() => this.testFullCV()}
+							onClick={() => this.setState(cvTemplateTest())}
 						>
 							<MdSend className="text-2xl mr-2 inline align-top"></MdSend>TEST
 							CV

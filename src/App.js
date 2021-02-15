@@ -2,8 +2,8 @@ import './App.css';
 import CV from './components/CV';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Font } from '@react-pdf/renderer'
+import React, { useEffect, useState} from 'react';
+import {Font } from '@react-pdf/renderer'
 import fontLight from './assets/fonts/SourceSansPro-Light.otf';
 import font from './assets/fonts/SourceSansPro-Regular.otf';
 import fontSemiBold from './assets/fonts/SourceSansPro-Semibold.otf';
