@@ -21,7 +21,6 @@ class Skills extends Component {
 	};
 
 	handleDelete(event) {
-		console.log(event);
 		this.props.del(event.target.id);
 		this.setState({ skillName: '' });
 	}

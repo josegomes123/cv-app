@@ -125,7 +125,7 @@ class ExperienceBlock extends Component {
 					></textarea>
 					<button
 						className="col-start-4 row-start-3 justify-self-end
-			 align-middle transform border border-gray-200 bg-gray-200 text-gray-700 shadow rounded-md px-3 py-2 m-2 transition duration-150 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline active:scale-95"
+						align-middle transform border border-red-200 bg-red-200  text-red-700 font-medium shadow rounded-md px-3 py-2 m-2 transition duration-150 ease select-none hover:bg-red-300 focus:outline-none focus:shadow-outline active:scale-95"
 						onClick={() => this.deleteBlock()}
 					>
 						<MdDeleteForever className="text-2xl inline align-middle"></MdDeleteForever>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import NameInput from './cv-components/NameInput';
 import SmallBio from './cv-components/SmallBio';
 import Email from './cv-components/Email';
@@ -19,7 +20,7 @@ import Sidebar from './sidebar/Sidebar';
 class CV extends Component {
 	constructor(props) {
 		super(props);
-
+		this.form = React.createRef();
 		this.state = {
 			photo: '',
 			name: '',
@@ -44,12 +45,12 @@ class CV extends Component {
 		this.handleEducationChange = this.handleEducationChange.bind(this);
 		this.handleExperienceChange = this.handleExperienceChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.loadTemplateCV = this.loadTemplateCV.bind(this)
+		this.loadTemplateCV = this.loadTemplateCV.bind(this);
 	}
 
 	static contextType = PreviewModeContext;
 
-	loadTemplateCV(cvData){
+	loadTemplateCV(cvData) {
 		this.setState(cvData);
 	}
 
@@ -105,7 +106,6 @@ class CV extends Component {
 	};
 
 	handleEducationDelete = (id) => {
-		console.log(`deleting education block with ID ${id}`);
 		this.setState((prevState) => ({
 			education: prevState.education.filter((edBlock) => edBlock.id !== id),
 		}));
@@ -140,7 +140,6 @@ class CV extends Component {
 	};
 
 	handleExperienceDelete = (id) => {
-		console.log(`deleting experience block with ID ${id}`);
 		this.setState((prevState) => ({
 			experience: prevState.experience.filter((expBlock) => expBlock.id !== id),
 		}));
@@ -153,33 +152,33 @@ class CV extends Component {
 		this.setState({
 			skills: this.state.skills.concat({ skillName: skillAdd, id: idAdd }),
 		});
-		console.log(this.state.skills);
 	};
 
 	handleSkillDelete = (id) => {
-		console.log(`deleting skill block with ID ${id}`);
 		this.setState((prevState) => ({
 			skills: prevState.skills.filter(
 				(skillBlock) => skillBlock.id !== parseInt(id)
 			),
 		}));
-		console.log(this.state.skills);
 	};
 
 	handleSubmit(event) {
-		event.preventDefault();
-		event.stopPropagation();
-		this.setState({ previewMode: true });
-		this.setState({ submitStatus: true });
-		localStorage.setItem('cv', JSON.stringify(this.state));
+		if (event == undefined) {
+			// event = this.form.dispatchEvent(new Event('submit'));
+		} else {
+			event.preventDefault();
+			event.stopPropagation();
+			this.setState({ previewMode: true });
+			this.setState({ submitStatus: true });
+		}
+
 	}
 
 	render() {
 		const { previewMode } = this.context;
 		return (
-			<div className="flex flex-column">
-				<div className="flex-grow">
-					<form onSubmit={this.handleSubmit}>
+				<form className="flex flex-column" onSubmit={this.handleSubmit}>
+					<div className="flex-grow">
 						<div
 							id="full-cv"
 							className="grid items-center place-content-center grid-cols-10 auto-cols-min grid-flow-row-dense auto-rows-min m-6"
@@ -250,38 +249,16 @@ class CV extends Component {
 								del={this.handleSkillDelete}
 								previewMode={previewMode}
 							></Skills>
-
-							{!this.state.submitStatus && (
-								<button
-									className="col-start-1  -my-24 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
-									type="submit"
-								>
-									<MdSend className="text-2xl mr-2 inline align-top"></MdSend>
-									Submit
-								</button>
-							)}
-							{previewMode && this.state.submitStatus && (
-								<button
-									onClick={() => generatePDFDocument(this.state)}
-									className="-my-24 col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
-								>
-									<MdFileDownload className="text-2xl mr-2 inline align-top"></MdFileDownload>
-									Download
-								</button>
-							)}
-
-							<button
-								className="col-start-1 col-end-11 place-self-center mb-12 font-medium transform border border-blue-200 bg-blue-200 text-blue-700 shadow rounded-md px-5 py-2 m-2 transition duration-150 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline active:scale-95"
-								onClick={() => this.setState(cvTemplateTest())}
-							>
-								<MdSend className="text-2xl mr-2 inline align-top"></MdSend>TEST
-								CV
-							</button>
 						</div>
-					</form>
-				</div>
-				<Sidebar handler={this.loadTemplateCV}></Sidebar>
-			</div>
+					</div>
+					<Sidebar
+						cvData={this.state}
+						submitStatus={this.state.submitStatus}
+						handleSubmit={this.handleSubmit}
+						handler={this.loadTemplateCV}
+					></Sidebar>
+				</form>
+
 		);
 	}
 }

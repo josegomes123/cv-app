@@ -1,8 +1,8 @@
 # CV App
 
-CV App created using Javascript, React and TailwindCSS
+CV App created using Javascript, React and TailwindCSS, React-PDF library and React-Icons Library
 
-**WORK IN PROGRESS**
+It allows you to create your own CV with multiple dynamic options and images included. It also creates and exports to PDF. This was my first "real" ReactJS project so it's probably a little bit spaghetti code as I learned as I went along.
 
 ## Tech Stack
 
@@ -14,7 +14,10 @@ CV App created using Javascript, React and TailwindCSS
 Here is the live demo: https://ze-gomes.github.io/cv-app/
 
 ## Preview
-![preview](https://i.imgur.com/wUfrEF4.png)
+### App Preview
+![preview](https://i.imgur.com/V3UUlDb.png)
+### Rendered PDF Preview
+![preview](https://i.imgur.com/JQy2iHl.png)
 
 ## License
 This project is licensed under the terms of the **[MIT](https://choosealicense.com/licenses/mit/)**  license. 

@@ -14,7 +14,6 @@ function Photo({ handleInput, previewMode }) {
 				setImgData(reader.result);
 				setPhotoUploaded(true);
 				localStorage.setItem("Photo",reader.result);
-				console.log(reader.result);
 			});
 			reader.readAsDataURL(e.target.files[0]);
 		}
