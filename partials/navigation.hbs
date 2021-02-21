@@ -1,0 +1,15 @@
+{{#if isSecondary}}
+    <div class="sidenav" role="menu">
+        {{#foreach navigation}}
+                <a class="sidebar-link hvr-underline-from-left" href="{{url absolute="true"}}">{{label}}</a>
+        {{/foreach}}
+    </div>
+{{else}}
+    <ul class="nav" role="menu">
+        {{#foreach navigation}}
+            <li class="{{link_class for=(url) class=(concat "nav-" slug)}}" role="menuitem">
+                <a class="hvr-underline-from-left" href="{{url absolute="true"}}">{{label}}</a>
+            </li>
+        {{/foreach}}
+    </ul>
+{{/if}}

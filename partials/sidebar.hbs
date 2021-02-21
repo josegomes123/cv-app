@@ -1,0 +1,15 @@
+<div id="sidebar" class="sidebar ">
+    {{!tag_cloud limit="all"}}
+    {{! 全局：标签云 }}
+    {{navigation type="secondary"}}
+    {{!-- {{> navigation type="secondary"}} --}}
+
+    {{> "tag_cloud"}}
+    {{> "cryptowidget"}}
+    {{! 文章：显示文章目录 }}
+    {{#is "post"}}
+    {{> "toc"}}
+    {{/is}}
+
+
+</div>
